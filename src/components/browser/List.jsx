@@ -1,15 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useLoaderData } from "react-router-dom";
 
 const List = () => {
-  const [listings, setListings] = useState([]);
-
-  useEffect(() => {
-    fetch("/data.json")
-      .then((res) => res.json())
-      .then((data) => setListings(data))
-      .catch((err) => console.error("Error loading data:", err));
-  }, []);
+  const dataLoader = useLoaderData();
 
   return (
     <div className="max-w-6xl mx-auto p-6">
@@ -30,19 +23,19 @@ const List = () => {
             </tr>
           </thead>
           <tbody>
-            {listings.map((item) => (
+            {dataLoader.map((item) => (
               <tr
                 key={item.id}
                 className="border-b hover:bg-blue-50 transition-colors"
               >
-                <td className="px-6 py-4">{item.name}</td>
+                <td className="px-6 py-4">{item.userName}</td>
                 <td className="px-6 py-4">{item.location}</td>
                 <td className="px-6 py-4">{item.age || "N/A"}</td>
                 <td className="px-6 py-4">{item.roomType}</td>
                 <td className="px-6 py-4">${item.rentAmount}</td>
                 <td className="px-6 py-4">
                   <Link
-                    to={`/details/${item.id}`}
+                    to={`/details/${item._id}`}
                     className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
                   >
                     See More

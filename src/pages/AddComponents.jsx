@@ -1,8 +1,11 @@
-import React from "react";
+import React, { use } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const AddComponents = () => {
   const navigate = useNavigate()
+  const {user} = use(AuthContext);
+  console.log(user)
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -136,7 +139,7 @@ fetch("http://localhost:5000/roommateadd", {
           type="email"
           name="userEmail"
           className="input w-full"
-          value="john.doe@example.com"
+          value={user?user.email:"ddddd"}
           readOnly
         />
 
@@ -145,7 +148,7 @@ fetch("http://localhost:5000/roommateadd", {
           type="text"
           name="userName"
           className="input w-full"
-          value="John Doe"
+          value={user ? user.displayName:null}
           readOnly
         />
 

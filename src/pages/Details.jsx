@@ -1,20 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
+import { useLoaderData } from "react-router-dom";
 import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
 
 const Details = () => {
-  const { id } = useParams();
-  const [roommate, setRoommate] = useState(null);
-
-  useEffect(() => {
-    fetch("/data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const found = data.find((item) => item.id === parseInt(id));
-        setRoommate(found);
-      })
-      .catch((err) => console.error("Error loading details:", err));
-  }, [id]);
+  const roommate = useLoaderData();
 
   if (!roommate) {
     return <div className="text-center mt-10">Loading...</div>;
@@ -27,14 +16,14 @@ const Details = () => {
         <div className="relative">
           <img
             src={roommate.img || "https://via.placeholder.com/100"}
-            alt={roommate.name}
+            alt={roommate.userName}
             className="w-20 h-20 rounded-full border-4 border-blue-500 object-cover"
           />
           <span className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></span>
         </div>
         <div>
-          <h1 className="text-3xl font-bold text-blue-700">{roommate.name}</h1>
-          <p className="text-gray-600">{roommate.bio}</p>
+          <h1 className="text-3xl font-bold text-blue-700">{roommate.userName}</h1>
+          <p className="text-gray-600">{roommate.description}</p>
         </div>
       </div>
 
@@ -60,7 +49,7 @@ const Details = () => {
           <li><strong>Age:</strong> {roommate.age || "N/A"}</li>
           <li><strong>Room Type:</strong> {roommate.roomType}</li>
           <li><strong>Rent Amount:</strong> ${roommate.rentAmount}</li>
-          <li><strong>Budget:</strong> {roommate.budget}</li>
+          <li><strong>Budget:</strong> {roommate.budget || "N/A"}</li>
           <li><strong>Availability:</strong> {roommate.availability ? "Available" : "Not Available"}</li>
         </ul>
       </div>

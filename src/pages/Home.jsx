@@ -3,6 +3,7 @@ import { Link, useLoaderData } from "react-router-dom";
 import Header from "../components/heders/Headder";
 const Home = () => {
   const loderData = useLoaderData();
+  console.log(loderData)
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -27,7 +28,7 @@ const Home = () => {
               </p>
               <p className="mt-2 text-center">{roommate.bio}</p>
               <button className="bg-blue-200 p-[10px] rounded-2xl cursor-pointer">
-                <Link to={`details/${roommate.id}`}> See More</Link>
+                <Link to={`details/${roommate._id}`}> See More</Link>
               </button>
             </div>
           ))}

@@ -14,6 +14,7 @@ import AddComponents from "./pages/AddComponents";
 import List from "./components/browser/List";
 import AuthProvider from "./context/AuthProvider";
 import ProtectedRoute from "./components/protected/ProtectedRoute";
+import MyList from "./components/myList/MyList";
 
 // Define the routes
 const router = createBrowserRouter([
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/rommate/${params.id}`).then((res) =>
+            res.json()
+          ),
         element: (
           <ProtectedRoute>
             <Details />
@@ -48,11 +53,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/browse-listings",
+        loader: () => fetch("http://localhost:5000/rommatedata"),
         element: <List />,
       },
       {
         path: "/my-listings",
-        element: <List />,
+        element: <MyList />,
       },
     ],
   },

@@ -13,6 +13,7 @@ import Login from "./components/auth/Login";
 import AddComponents from "./pages/AddComponents";
 import List from "./components/browser/List";
 import AuthProvider from "./context/AuthProvider";
+import ProtectedRoute from "./components/protected/ProtectedRoute";
 
 // Define the routes
 const router = createBrowserRouter([
@@ -22,11 +23,16 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        loader: () => fetch("http://localhost:5000/rommatedata"),
         element: <Home />,
       },
       {
         path: "/details/:id",
-        element: <Details />,
+        element: (
+          <ProtectedRoute>
+            <Details />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/roommateadd",

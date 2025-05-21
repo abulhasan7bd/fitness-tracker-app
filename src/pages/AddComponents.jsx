@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddComponents = () => {
+  const navigate = useNavigate()
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -41,6 +43,7 @@ fetch("http://localhost:5000/roommateadd", {
   })
   .then(result => {
     console.log("Server response:", result);
+    navigate("/")
   })
   .catch(err => {
     console.error("Fetch error:", err.message);

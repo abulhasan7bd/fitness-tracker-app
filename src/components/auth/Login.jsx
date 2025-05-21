@@ -1,12 +1,25 @@
-import React from "react";
+import React, { use } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
+  const { userLogin,  } = use(AuthContext);
+ 
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
-    console.log("Login Data:", data);
+    userLogin(data.email, data.password)
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("login", "true");
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleGoogleLogin = () => {};
@@ -50,6 +63,12 @@ const Login = () => {
           >
             Continue with Google
           </button>
+          <p>
+            Don't have an account?
+            <Link to="/register" className="text-blue-600 hover:underline">
+              Sign In
+            </Link>
+          </p>
         </fieldset>
       </form>
     </div>

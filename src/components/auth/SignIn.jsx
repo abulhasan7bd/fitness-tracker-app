@@ -1,18 +1,39 @@
 import React from "react";
 import { use } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../../../firebase.init";
 const SignIn = () => {
-  const {googleRegister} = use(AuthContext)
- 
-  const handleSubmit = (e) => {
+  const { googleRegister, accountCreate } = use(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const redirect = location.state?.from.pathname || "/";
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
+    try {
+      await accountCreate(data.email, data.password); 
+      await updateProfile(auth.currentUser, {
+        displayName: data.name,
+        photoURL: data.photoURL,
+      });
+
+      console.log("User profile updated!");
+    } catch (err) {
+      console.log("Error:", err.message);
+    }
   };
+
   const handleGoogleLogin = () => {
-    googleRegister().then((res)=>console.log(res)).catch((err)=>console.log(err))
+    googleRegister()
+      .then((res) => {
+        console.log(res);
+        navigate(`${redirect}`);
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -70,6 +91,12 @@ const SignIn = () => {
           >
             Continue with Google
           </button>
+          <p>
+            Already have an account?{" "}
+            <Link to="/login" className="text-blue-600 hover:underline">
+              Login
+            </Link>
+          </p>
         </fieldset>
       </form>
     </div>

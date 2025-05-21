@@ -1,8 +1,10 @@
 import React from "react";
 import { AuthContext } from "./AuthContext/";
 import {
+  createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "./../../firebase.init";
@@ -11,7 +13,8 @@ import { useState } from "react";
 const AuthProvider = ({ children }) => {
   // state defined
   const [user, setUser] = useState(null);
-  const [loading,setLoading]=useState(true)
+  const [loading, setLoading] = useState(true);
+
 
   //  SIGN IN GOOGLE
   const googleRegister = () => {
@@ -19,16 +22,28 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, provider);
   };
 
+  // LOGIN GMAIL & PASSWORD
+  const userLogin = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+  //   ACCOUNT CREATE EMAIL & PASSWORD
+  const accountCreate = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+
+
+
   //   REAL TIME USER HANDELING
   useEffect(() => {
     const currentUser = () => {
       onAuthStateChanged(auth, (user) => {
         if (user) {
           setUser(user);
-          console.log(user);
+          setLoading(false);
         } else {
           console.log("Current User Signout");
-          setUser(null)
+          setUser(null);
         }
       });
     };
@@ -37,7 +52,16 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  const userInfo = { name: "abulhasan", googleRegister, user };
+  const userInfo = {
+    name: "abulhasan",
+    googleRegister,
+    user,
+    accountCreate,
+    userLogin,
+    loading,
+    setLoading,
+  
+  };
   return <AuthContext value={userInfo}>{children}</AuthContext>;
 };
 

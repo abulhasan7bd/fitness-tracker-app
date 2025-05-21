@@ -1,18 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useLoaderData } from "react-router-dom";
 import Header from "../components/heders/Headder";
 const Home = () => {
-  const [roommates, setRoommates] = useState([]);
-
-  useEffect(() => {
-    fetch("/data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setRoommates(data.slice(0, 7)); // শুধু ৬টি
-      })
-      .catch((error) => console.error("Error loading data:", error));
-  }, []);
-console.log(roommates)
+  const loderData = useLoaderData();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -21,7 +11,7 @@ console.log(roommates)
       <section className="p-8 bg-gray-100">
         <h2 className="text-3xl font-semibold mb-6">Featured Roommates</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {roommates.map((roommate) => (
+          {loderData.slice(0,6).map((roommate) => (
             <div
               key={roommate.id}
               className="bg-white rounded shadow p-4 flex flex-col items-center"

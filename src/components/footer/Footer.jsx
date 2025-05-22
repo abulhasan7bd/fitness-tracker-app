@@ -33,13 +33,13 @@ const Footer = () => {
         <div>
           <h2 className="text-lg font-semibold mb-3">Follow Us</h2>
           <div className="flex gap-4">
-            <a href="https://facebook.com" target="_blank" rel="noreferrer">
+            <a href="https://www.facebook.com/AbulHasanFB" target="_blank" rel="noreferrer">
               <FaFacebook size={24} className="hover:text-blue-500" />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noreferrer">
+            <a href="https://www.facebook.com/AbulHasanFB" target="_blank" rel="noreferrer">
               <FaTwitter size={24} className="hover:text-blue-400" />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer">
+            <a href="https://www.facebook.com/AbulHasanFB" target="_blank" rel="noreferrer">
               <FaInstagram size={24} className="hover:text-pink-500" />
             </a>
           </div>

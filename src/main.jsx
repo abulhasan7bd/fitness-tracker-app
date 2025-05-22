@@ -11,10 +11,12 @@ import Details from "./pages/Details";
 import SignIn from "./components/auth/SignIn";
 import Login from "./components/auth/Login";
 import AddComponents from "./pages/AddComponents";
-import List from "./components/browser/List";
 import AuthProvider from "./context/AuthProvider";
 import ProtectedRoute from "./components/protected/ProtectedRoute";
 import MyList from "./components/myList/MyList";
+import Edit from "./components/myList/Edit";
+import NotFoundPage from "./pages/NotFoundPage";
+import BrowserListinWrapper from "./components/browser/BrowserListinWrapper";
 
 // Define the routes
 const router = createBrowserRouter([
@@ -24,14 +26,15 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        loader: () => fetch("http://localhost:5000/rommatedata"),
+        loader: () => fetch("https://rommate-server.vercel.app/rommatedata"),
         element: <Home />,
       },
+      { path: "*", element: <NotFoundPage /> },
       {
         path: "/details/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/rommate/${params.id}`).then((res) =>
-            res.json()
+          fetch(`https://rommate-server.vercel.app/rommate/${params.id}`).then(
+            (res) => res.json()
           ),
         element: (
           <ProtectedRoute>
@@ -41,7 +44,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/roommateadd",
-        element: <AddComponents />,
+        element: (
+          <ProtectedRoute>
+            <AddComponents />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/register",
@@ -53,12 +60,22 @@ const router = createBrowserRouter([
       },
       {
         path: "/browse-listings",
-        loader: () => fetch("http://localhost:5000/rommatedata"),
-        element: <List />,
+        loader: () => fetch("https://rommate-server.vercel.app/rommatedata"),
+        element: <BrowserListinWrapper />,
       },
       {
         path: "/my-listings",
-        element: <MyList />,
+        element: (
+          <ProtectedRoute>
+            <MyList />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/my-listings/edit/:id",
+        loader: ({ params }) =>
+          fetch(`https://rommate-server.vercel.app/rommate/${params.id}`),
+        element: <Edit />,
       },
     ],
   },

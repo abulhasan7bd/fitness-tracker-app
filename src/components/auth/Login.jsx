@@ -1,10 +1,11 @@
 import React, { use } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-
+import Swal from "sweetalert2";
 const Login = () => {
-  const { userLogin,  } = use(AuthContext);
- 
+  const { userLogin, googleRegister, setLogin } = use(AuthContext);
+  const location = useLocation();
+  const redirect = location.state?.from.pathname || "/";
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,57 +15,97 @@ const Login = () => {
     userLogin(data.email, data.password)
       .then((res) => {
         console.log(res);
-        localStorage.setItem("login", "true");
+        localStorage.setItem("user", JSON.stringify(true));
+        setLogin(true);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your account is Login",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate("/");
+
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const handleGoogleLogin = () => {};
+  const handleGoogleLogin = () => {
+    googleRegister()
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("user", JSON.stringify(true));
+        setLogin(true);
+        navigate(`${redirect}`);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your account is Login",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <form onSubmit={handleSubmit}>
-        <fieldset className="bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          <legend className="fieldset-legend text-lg font-bold mb-2">
-            Login
-          </legend>
+    <div className="flex justify-center items-center min-h-screen px-4">
+      <form onSubmit={handleSubmit} className="w-full max-w-md">
+        <fieldset className="bg-base-200 border border-base-300 rounded-box p-6">
+          <p className=" text-lg font-bold mb-4 text-center">Login</p>
 
-          <label className="label">Email</label>
-          <input
-            type="email"
-            name="email"
-            className="input"
-            placeholder="Email"
-            required
-          />
+          {/* Email Field */}
+          <div className="mb-4">
+            <label className="label" htmlFor="email">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              className="input input-bordered w-full"
+              placeholder="Email"
+              required
+            />
+          </div>
 
-          <label className="label">Password</label>
-          <input
-            type="password"
-            name="password"
-            className="input"
-            placeholder="Password"
-            required
-          />
+          {/* Password Field */}
+          <div className="mb-4">
+            <label className="label" htmlFor="password">
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              className="input input-bordered w-full"
+              placeholder="Password"
+              required
+            />
+          </div>
 
-          <button type="submit" className="btn btn-neutral mt-4 w-full">
+          {/* Login Button */}
+          <button type="submit" className="btn btn-neutral w-full mb-4">
             Login
           </button>
 
+          {/* Divider */}
           <div className="divider">OR</div>
 
+          {/* Google Login */}
           <button
             type="button"
             onClick={handleGoogleLogin}
-            className="btn btn-outline w-full"
+            className="btn btn-outline w-full mb-4"
           >
             Continue with Google
           </button>
-          <p>
-            Don't have an account?
+
+          {/* Register Redirect */}
+          <p className="text-center">
+            Don't have an account?{" "}
             <Link to="/register" className="text-blue-600 hover:underline">
               Sign In
             </Link>

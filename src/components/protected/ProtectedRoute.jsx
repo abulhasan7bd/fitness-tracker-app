@@ -1,20 +1,19 @@
-import React from "react";
-import { use } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Navigate, useLocation } from "react-router-dom";
-
+ 
 const ProtectedRoute = ({ children }) => {
-  const { user,loading } = use(AuthContext);
-  console.log(loading)
-  console.log(user)
-   let location = useLocation();
+  const { user, loading } = useContext(AuthContext);
+  const location = useLocation();
 
-   if(loading){
-    return <h2>Loading....</h2>
-   }
-  if (!user) {
-  return  <Navigate to="/register" state={{ from: location}}/>;
+  if (loading) {
+    return <h3>Loading Protected Route......</h3>;
   }
+
+  if (!user) {
+    return <Navigate to="/register" state={{ from: location }} replace />;
+  }
+
   return children;
 };
 

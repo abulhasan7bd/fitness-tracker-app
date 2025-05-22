@@ -15,7 +15,6 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-
   //  SIGN IN GOOGLE
   const googleRegister = () => {
     const provider = new GoogleAuthProvider();
@@ -31,25 +30,30 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-
-
-
-  //   REAL TIME USER HANDELING
   useEffect(() => {
-    const currentUser = () => {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          setUser(user);
-          setLoading(false);
-        } else {
-          console.log("Current User Signout");
-          setUser(null);
-        }
-      });
-    };
-    return () => {
-      currentUser();
-    };
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+        localStorage.setItem("user", JSON.stringify(false));
+        setLogin(false);
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const [login, setLogin] = useState(false);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setLogin(JSON.parse(storedUser));
+    } else {
+      setLogin(false);
+    }
   }, []);
 
   const userInfo = {
@@ -60,7 +64,8 @@ const AuthProvider = ({ children }) => {
     userLogin,
     loading,
     setLoading,
-  
+    login,
+    setLogin,
   };
   return <AuthContext value={userInfo}>{children}</AuthContext>;
 };

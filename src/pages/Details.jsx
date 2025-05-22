@@ -4,7 +4,7 @@ import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
 
 const Details = () => {
   const roommate = useLoaderData();
-
+console.log(roommate)
   if (!roommate) {
     return <div className="text-center mt-10">Loading...</div>;
   }

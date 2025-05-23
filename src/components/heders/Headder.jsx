@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
-const Header = () => {
+const Header = ({setValue}) => {
+
+  const [search, setSerch] = useState("");
   const handleDone = () => {
     console.log(`Done after 5 loops!`);
+  };
+  const handleSearch = () => {
+    setValue(search)
   };
 
   return (
@@ -38,31 +43,23 @@ const Header = () => {
         <div className="mt-8 relative">
           <input
             type="text"
-            placeholder="Search your perfect roommate"
+            placeholder="Choose your location"
             className="py-6 w-full pl-5 pr-[12rem] rounded-xl bg-white text-black placeholder:text-gray-500 border-none outline-none"
+            value={search}
+            onChange={(e) => setSerch(e.target.value)}
           />
 
           {/* Select Dropdown */}
           <div className="absolute right-[9rem] top-1/2 transform -translate-y-1/2 flex items-center gap-2 bg-white px-3 py-2 rounded-xl shadow-md">
             <FaMapMarkerAlt className="text-black text-xl" />
-            <select
-              className="bg-transparent focus:outline-none text-black"
-              defaultValue=""
-            >
-              <option value="" disabled>
-                Choose location
-              </option>
-              <option>New York</option>
-              <option>Los Angeles</option>
-              <option>Chicago</option>
-              <option>Dhaka</option>
-              <option>London</option>
-              <option>Toronto</option>
-            </select>
+           
           </div>
 
           {/* Search Button */}
-          <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-500 cursor-pointer hover:bg-red-600 text-white font-semibold px-6 py-3 rounded-xl shadow-lg flex items-center gap-2 transition duration-300">
+          <button
+            onClick={() => handleSearch()}
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-500 cursor-pointer hover:bg-red-600 text-white font-semibold px-6 py-3 rounded-xl shadow-lg flex items-center gap-2 transition duration-300"
+          >
             <FaSearch className="text-white" />
             Find
           </button>

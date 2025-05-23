@@ -27,8 +27,15 @@ const Login = () => {
         navigate("/");
 
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+          Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Your account Not Found please try again !",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      
       });
   };
 

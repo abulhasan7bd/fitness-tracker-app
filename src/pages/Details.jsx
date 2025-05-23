@@ -3,16 +3,29 @@ import { useLoaderData } from "react-router-dom";
 import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
 
 const Details = () => {
-  const [likeCount, setLikeCount] = useState(0);
   const roommate = useLoaderData();
-  const [show,setShow]=useState(false)
-  console.log(roommate);
+  const [show, setShow] = useState(false);
+  const [likeCount, setLikeCount] = useState(roommate.like);
   if (!roommate) {
     return <div className="text-center mt-10">Loading...</div>;
   }
   const like = () => {
-    setLikeCount(likeCount + 1);
-    setShow(true)
+    fetch(`https://rommate-founder-server.vercel.app/like/${roommate._id}`, {
+      method: "PUT",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify({ likes: likeCount + 1 }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setShow(true);
+        setLikeCount(data.like + 1);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className="mx-auto p-6 max-w-5xl relative">
@@ -121,7 +134,8 @@ const Details = () => {
           Contact Information
         </h2>
         <p>
-          <strong>Phone:</strong> {show ? roommate.contactInfo:"Like be Required" }
+          <strong>Phone:</strong>{" "}
+          {show ? roommate.contactInfo : "Like be Required"}
         </p>
         <p>
           <strong>Email:</strong> {roommate.userEmail}

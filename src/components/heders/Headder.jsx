@@ -20,9 +20,9 @@ const Header = ({setValue}) => {
   }}
 >
   <div className="max-w-3xl w-full  text-white   dark:bg-transparent dark:text-white p-6 rounded-lg shadow">
-    <h2 className="text-5xl md:text-6xl font-bold text-left font-poppins">
+    <h2 className="text-5xl md:text-6xl sm:text-4xl     font-bold text-left font-poppins">
       Find Your Perfect Roommate <br />
-      <span className="text-red-400">
+      <span className="text-gray-300">
         <Typewriter
           words={[
             "Anytime, Anywhere",
@@ -44,7 +44,7 @@ const Header = ({setValue}) => {
       <input
         type="text"
         placeholder="Choose your location"
-        className="py-6 w-full pl-5 pr-[12rem] rounded-xl bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-300 border-none outline-none"
+        className="py-4 sm:py-6 w-full pl-5 pr-[12rem] rounded-xl bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-300 border-none outline-none"
         value={search}
         onChange={(e) => setSerch(e.target.value)}
       />

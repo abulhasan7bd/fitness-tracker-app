@@ -15,14 +15,13 @@ const MyList = () => {
       if (!userEmail) return;
       try {
         const res = await fetch(
-          `https://rommate-server.vercel.app/findbyEmail?email=${userEmail}`
+          `https://rommate-founder-server.vercel.app/findbyEmail?email=${userEmail}`
         );
         const data = await res.json();
         if (Array.isArray(data)) {
           setListings(data);
-        
         } else {
-          setListings([]); 
+          setListings([]);
         }
       } catch (err) {
         console.log(err);
@@ -44,7 +43,7 @@ const MyList = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://rommate-server.vercel.app/delete/${id}`, {
+        fetch(`https://rommate-founder-server.vercel.app/delete/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -90,7 +89,9 @@ const MyList = () => {
                     <td className="px-4 py-2">{item.location}</td>
                     <td className="px-4 py-2">
                       {item.availability ? (
-                        <span className="text-green-600 font-semibold">Yes</span>
+                        <span className="text-green-600 font-semibold">
+                          Yes
+                        </span>
                       ) : (
                         <span className="text-red-500 font-semibold">No</span>
                       )}
@@ -119,10 +120,18 @@ const MyList = () => {
           <div className="md:hidden space-y-4">
             {listings.map((item) => (
               <div key={item._id} className="border p-4 rounded-md shadow">
-                <p><strong>Name:</strong> {item.userName}</p>
-                <p><strong>Email:</strong> {item.userEmail}</p>
-                <p><strong>Title:</strong> {item.title}</p>
-                <p><strong>Description:</strong> {item.location}</p>
+                <p>
+                  <strong>Name:</strong> {item.userName}
+                </p>
+                <p>
+                  <strong>Email:</strong> {item.userEmail}
+                </p>
+                <p>
+                  <strong>Title:</strong> {item.title}
+                </p>
+                <p>
+                  <strong>Description:</strong> {item.location}
+                </p>
                 <p>
                   <strong>Available:</strong>{" "}
                   {item.availability ? (

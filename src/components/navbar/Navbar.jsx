@@ -79,7 +79,6 @@ const Navbar = () => {
     }
   }, [dark]);
 
-  console.log(login,user)
   return (
     <nav className="bg-[#FFFFFF] text-black   sticky top-0 shadow-md w-full z-50 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">

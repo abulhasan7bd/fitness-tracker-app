@@ -32,13 +32,16 @@ const Edit = () => {
     delete data.smoking;
     delete data.nightOwl;
     console.log(data);
-    fetch(`https://rommate-server.vercel.app/rommateEdit/${loaderData._id}`, {
-      method: "PUT",
-      headers: {
-        "content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    fetch(
+      `https://rommate-founder-server.vercel.app/rommateEdit/${loaderData._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    )
       .then((res) => {
         console.log(res);
         navigate("/my-listings");
@@ -49,138 +52,140 @@ const Edit = () => {
   };
 
   return (
-<div className="flex justify-center items-center min-h-screen px-4">
-  <form
-    onSubmit={handleSubmit}
-    className="w-full max-w-4xl bg-base-200 p-6 rounded-lg shadow-lg"
-  >
-    <h2 className="text-2xl font-semibold mb-6 text-center">
-      Update Roommate Post
-    </h2>
+    <div className="flex justify-center items-center min-h-screen px-4">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-4xl bg-base-200 p-6 rounded-lg shadow-lg"
+      >
+        <h2 className="text-2xl font-semibold mb-6 text-center">
+          Update Roommate Post
+        </h2>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {/* Left Column */}
-      <div>
-        <label className="label">Title</label>
-        <input
-          type="text"
-          name="title"
-          className="input w-full"
-          placeholder="Post title"
-          defaultValue={loaderData.title}
-          required
-        />
-
-        <label className="label">Rent Amount ($)</label>
-        <input
-          type="number"
-          name="rentAmount"
-          className="input w-full"
-          placeholder="1200"
-          defaultValue={loaderData.rentAmount}
-          required
-        />
-
-        <label className="label">Room Type</label>
-        <select
-          name="roomType"
-          className="select w-full"
-          defaultValue={loaderData.roomType}
-          required
-        >
-          <option value="">Select type</option>
-          <option value="Single">Single</option>
-          <option value="Shared">Shared</option>
-        </select>
-
-        <label className="label">Lifestyle Preferences</label>
-        <div className="flex flex-wrap gap-4 mb-2">
-          <label className="flex items-center gap-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Left Column */}
+          <div>
+            <label className="label">Title</label>
             <input
-              type="checkbox"
-              name="pets"
-              defaultChecked={loaderData.lifestylePreferences.pets}
-            /> Pets
-          </label>
-          <label className="flex items-center gap-1">
+              type="text"
+              name="title"
+              className="input w-full"
+              placeholder="Post title"
+              defaultValue={loaderData.title}
+              required
+            />
+
+            <label className="label">Rent Amount ($)</label>
             <input
-              type="checkbox"
-              name="smoking"
-              defaultChecked={loaderData.lifestylePreferences.smoking}
-            /> Smoking
-          </label>
-          <label className="flex items-center gap-1">
+              type="number"
+              name="rentAmount"
+              className="input w-full"
+              placeholder="1200"
+              defaultValue={loaderData.rentAmount}
+              required
+            />
+
+            <label className="label">Room Type</label>
+            <select
+              name="roomType"
+              className="select w-full"
+              defaultValue={loaderData.roomType}
+              required
+            >
+              <option value="">Select type</option>
+              <option value="Single">Single</option>
+              <option value="Shared">Shared</option>
+            </select>
+
+            <label className="label">Lifestyle Preferences</label>
+            <div className="flex flex-wrap gap-4 mb-2">
+              <label className="flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  name="pets"
+                  defaultChecked={loaderData.lifestylePreferences.pets}
+                />{" "}
+                Pets
+              </label>
+              <label className="flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  name="smoking"
+                  defaultChecked={loaderData.lifestylePreferences.smoking}
+                />{" "}
+                Smoking
+              </label>
+              <label className="flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  name="nightOwl"
+                  defaultChecked={loaderData.lifestylePreferences.nightOwl}
+                />{" "}
+                Night Owl
+              </label>
+            </div>
+
+            <label className="label">Contact Info</label>
             <input
-              type="checkbox"
-              name="nightOwl"
-              defaultChecked={loaderData.lifestylePreferences.nightOwl}
-            /> Night Owl
-          </label>
+              type="text"
+              name="contactInfo"
+              className="input w-full"
+              placeholder="Phone or email"
+              defaultValue={loaderData.contactInfo}
+              required
+            />
+
+            <label className="flex items-center gap-2 my-2">
+              <input type="checkbox" name="availability" defaultChecked />
+              Available
+            </label>
+          </div>
+
+          {/* Right Column */}
+          <div>
+            <label className="label">Location</label>
+            <input
+              type="text"
+              name="location"
+              className="input w-full"
+              placeholder="City/Area"
+              defaultValue={loaderData.location}
+              required
+            />
+
+            <label className="label">Description</label>
+            <textarea
+              name="description"
+              className="textarea w-full resize-none h-[100px]"
+              placeholder="Write something..."
+              defaultValue={loaderData.description}
+              required
+            />
+
+            <label className="label">User Email (Read-only)</label>
+            <input
+              type="email"
+              name="userEmail"
+              className="input w-full"
+              value={user ? user.email : ""}
+              readOnly
+            />
+
+            <label className="label">User Name (Read-only)</label>
+            <input
+              type="text"
+              name="userName"
+              className="input w-full"
+              value={user ? user.displayName : ""}
+              readOnly
+            />
+          </div>
         </div>
 
-        <label className="label">Contact Info</label>
-        <input
-          type="text"
-          name="contactInfo"
-          className="input w-full"
-          placeholder="Phone or email"
-          defaultValue={loaderData.contactInfo}
-          required
-        />
-
-        <label className="flex items-center gap-2 my-2">
-          <input type="checkbox" name="availability" defaultChecked />
-          Available
-        </label>
-      </div>
-
-      {/* Right Column */}
-      <div>
-        <label className="label">Location</label>
-        <input
-          type="text"
-          name="location"
-          className="input w-full"
-          placeholder="City/Area"
-          defaultValue={loaderData.location}
-          required
-        />
-
-        <label className="label">Description</label>
-        <textarea
-          name="description"
-          className="textarea w-full resize-none h-[100px]"
-          placeholder="Write something..."
-          defaultValue={loaderData.description}
-          required
-        />
-
-        <label className="label">User Email (Read-only)</label>
-        <input
-          type="email"
-          name="userEmail"
-          className="input w-full"
-          value={user ? user.email : ""}
-          readOnly
-        />
-
-        <label className="label">User Name (Read-only)</label>
-        <input
-          type="text"
-          name="userName"
-          className="input w-full"
-          value={user ? user.displayName : ""}
-          readOnly
-        />
-      </div>
+        <button type="submit" className="btn btn-primary w-full mt-6">
+          Update
+        </button>
+      </form>
     </div>
-
-    <button type="submit" className="btn btn-primary w-full mt-6">
-      Update
-    </button>
-  </form>
-</div>
-
   );
 };
 

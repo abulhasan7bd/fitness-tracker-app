@@ -26,16 +26,17 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        loader: () => fetch("https://rommate-server.vercel.app/rommatedata"),
+        loader: () =>
+          fetch("https://rommate-founder-server.vercel.app/rommatedata"),
         element: <Home />,
       },
       { path: "*", element: <NotFoundPage /> },
       {
         path: "/details/:id",
         loader: ({ params }) =>
-          fetch(`https://rommate-server.vercel.app/rommate/${params.id}`).then(
-            (res) => res.json()
-          ),
+          fetch(
+            `https://rommate-founder-server.vercel.app/rommate/${params.id}`
+          ).then((res) => res.json()),
         element: (
           <ProtectedRoute>
             <Details />
@@ -60,7 +61,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/browse-listings",
-        loader: () => fetch("https://rommate-server.vercel.app/rommatedata"),
+        loader: () =>
+          fetch("https://rommate-founder-server.vercel.app/rommatedata"),
         element: <BrowserListinWrapper />,
       },
       {
@@ -74,7 +76,9 @@ const router = createBrowserRouter([
       {
         path: "/my-listings/edit/:id",
         loader: ({ params }) =>
-          fetch(`https://rommate-server.vercel.app/rommate/${params.id}`),
+          fetch(
+            `https://rommate-founder-server.vercel.app/rommate/${params.id}`
+          ),
         element: <Edit />,
       },
     ],

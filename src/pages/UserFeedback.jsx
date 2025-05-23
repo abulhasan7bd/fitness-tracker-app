@@ -35,7 +35,7 @@ const testimonials = [
 
 const UserFeedback = () => {
   return (
-    <section className="py-18 bg-gray-50" id="feedback">
+    <section className="py-18 bg-gray-50  dark:bg-gray-800" id="feedback">
       <div className="max-w-3xl mx-auto px-8">
         <h2 className="text-3xl font-bold text-center mb-8">
           What Our Users Say 💬

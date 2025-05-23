@@ -21,8 +21,8 @@ const SignIn = () => {
         displayName: data.name,
         photoURL: data.photoURL,
       });
-      localStorage.setItem("user", JSON.stringify(true));
-      setLogin(true);
+      // localStorage.setItem("user", JSON.stringify(true));
+      // setLogin(true);
       Swal.fire({
         position: "center",
         icon: "success",
@@ -30,8 +30,16 @@ const SignIn = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      navigate(`${redirect}`);
+      navigate("/login");
     } catch (err) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Account already exists. Try signing in or use another email.",
+
+        showConfirmButton: false,
+        timer: 1500,
+      });
       console.log("Error:", err.message);
     }
   };
@@ -93,16 +101,15 @@ const SignIn = () => {
             </div>
             <div>
               <label className="label">Password</label>
-           <input
-  type="password"
-  name="password"
-  className="input input-bordered w-full"
-  placeholder="Password"
-  required
-  pattern="(?=.*[a-z])(?=.*[A-Z]).+"
-  title="Password must contain at least one uppercase and one lowercase letter"
-/>
-
+              <input
+                type="password"
+                name="password"
+                className="input input-bordered w-full"
+                placeholder="Password"
+                required
+                pattern="(?=.*[a-z])(?=.*[A-Z]).+"
+                title="Password must contain at least one uppercase and one lowercase letter"
+              />
             </div>
           </div>
 

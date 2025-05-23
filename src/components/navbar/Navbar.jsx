@@ -1,15 +1,18 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { use } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebase.init";
 import Swal from "sweetalert2";
-
+import { Moon, Sun } from "lucide-react";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, login, setLogin } = use(AuthContext);
+  const [dark, setDark] = useState(true);
+  const location = useLocation();
+ 
   const handlemenu = () => {
     setIsOpen(!isOpen);
   };
@@ -64,6 +67,19 @@ const Navbar = () => {
     </>
   );
 
+  const darkHandle = () => {
+    setDark(!dark);
+  };
+
+  useEffect(() => {
+    if (dark) {
+      document.querySelector("html").classList.add("dark");
+    } else {
+      document.querySelector("html").classList.remove("dark");
+    }
+  }, [dark]);
+
+  console.log(login,user)
   return (
     <nav className="bg-[#FFFFFF] text-black   sticky top-0 shadow-md w-full z-50 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
@@ -84,7 +100,7 @@ const Navbar = () => {
           {navLinks}
 
           {/* profile  */}
-          {user && (
+          {user && login && (
             <div className="profile relative group w-max ">
               <p className="absolute text-[13px]  text-center  text-white bg-black bg-opacity-80 px-2 py-1 right-[100%] rounded opacity-0 group-hover:opacity-100 transition duration-300 z-10 w-[100px]">
                 {user?.displayName || "Nodd dNme"}
@@ -121,6 +137,9 @@ const Navbar = () => {
               Signup
             </Link>
           )}
+        {
+          location.pathname === "/" ?   <button className="cursor-pointer" onClick={darkHandle}>{dark ? <Sun /> : <Moon />}</button>:null
+        }
         </div>
 
         {/* Mobile Menu Icon */}

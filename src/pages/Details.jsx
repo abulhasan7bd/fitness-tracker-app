@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
 
 const Details = () => {
+  const [likeCount, setLikeCount] = useState(0);
   const roommate = useLoaderData();
-console.log(roommate)
+  const [show,setShow]=useState(false)
+  console.log(roommate);
   if (!roommate) {
     return <div className="text-center mt-10">Loading...</div>;
   }
-
+  const like = () => {
+    setLikeCount(likeCount + 1);
+    setShow(true)
+  };
   return (
-    <div className="mx-auto p-6 max-w-5xl">
+    <div className="mx-auto p-6 max-w-5xl relative">
+      <h2 className="text-[1.2rem] font-bold mb-4 text-center absolute right-0 top-[2rem]">
+        {likeCount} people interested in
+      </h2>
       {/* Header */}
       <div className="flex items-center gap-6 mb-6">
         <div className="relative">
@@ -21,8 +29,11 @@ console.log(roommate)
           />
           <span className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></span>
         </div>
+
         <div>
-          <h1 className="text-3xl font-bold text-blue-700">{roommate.userName}</h1>
+          <h1 className="text-3xl font-bold text-blue-700">
+            {roommate.userName}
+          </h1>
           <p className="text-gray-600">{roommate.description}</p>
         </div>
       </div>
@@ -38,42 +49,90 @@ console.log(roommate)
           />
         ))}
       </div>
+      <div className="grid grid-cols-3 gap-4 w-full text-center">
+        <button
+          onClick={() => like()}
+          className="bg-blue-500 cursor-pointer hover:bg-blue-600 text-white py-2 rounded"
+        >
+          Like 👍
+        </button>
 
+        <button className="bg-green-500 hover:bg-green-600 text-white py-2 rounded">
+          Comment 💬
+        </button>
+
+        <button className="bg-purple-500 hover:bg-purple-600 text-white py-2 rounded">
+          Share 🔗
+        </button>
+      </div>
       {/* Description */}
       <div className="bg-white shadow rounded p-6 mb-6">
-        <h2 className="text-xl font-semibold mb-2 text-gray-800">Room Details</h2>
+        <h2 className="text-xl font-semibold mb-2 text-gray-800">
+          Room Details
+        </h2>
         <p className="text-gray-700 mb-4">{roommate.description}</p>
 
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-gray-700">
-          <li><strong>Location:</strong> {roommate.location}</li>
-          <li><strong>Age:</strong> {roommate.age || "N/A"}</li>
-          <li><strong>Room Type:</strong> {roommate.roomType}</li>
-          <li><strong>Rent Amount:</strong> ${roommate.rentAmount}</li>
-          <li><strong>Budget:</strong> {roommate.budget || "N/A"}</li>
-          <li><strong>Availability:</strong> {roommate.availability ? "Available" : "Not Available"}</li>
+          <li>
+            <strong>Location:</strong> {roommate.location}
+          </li>
+          <li>
+            <strong>Age:</strong> {roommate.age || "N/A"}
+          </li>
+          <li>
+            <strong>Room Type:</strong> {roommate.roomType}
+          </li>
+          <li>
+            <strong>Rent Amount:</strong> ${roommate.rentAmount}
+          </li>
+          <li>
+            <strong>Budget:</strong> {roommate.budget || "N/A"}
+          </li>
+          <li>
+            <strong>Availability:</strong>{" "}
+            {roommate.availability ? "Available" : "Not Available"}
+          </li>
         </ul>
       </div>
 
       {/* Lifestyle Preferences */}
       <div className="bg-gray-100 p-6 rounded shadow mb-6">
-        <h2 className="text-lg font-semibold text-gray-800 mb-3">Lifestyle Preferences</h2>
+        <h2 className="text-lg font-semibold text-gray-800 mb-3">
+          Lifestyle Preferences
+        </h2>
         <ul className="list-disc list-inside text-gray-700 space-y-1">
-          <li>Pets: {roommate.lifestylePreferences?.pets ? "Allowed" : "Not allowed"}</li>
-          <li>Smoking: {roommate.lifestylePreferences?.smoking ? "Allowed" : "Not allowed"}</li>
-          <li>Night Owl: {roommate.lifestylePreferences?.nightOwl ? "Yes" : "No"}</li>
+          <li>
+            Pets:{" "}
+            {roommate.lifestylePreferences?.pets ? "Allowed" : "Not allowed"}
+          </li>
+          <li>
+            Smoking:{" "}
+            {roommate.lifestylePreferences?.smoking ? "Allowed" : "Not allowed"}
+          </li>
+          <li>
+            Night Owl: {roommate.lifestylePreferences?.nightOwl ? "Yes" : "No"}
+          </li>
         </ul>
       </div>
 
       {/* Contact Info */}
       <div className="bg-white p-6 shadow rounded mb-6">
-        <h2 className="text-lg font-semibold text-gray-800 mb-2">Contact Information</h2>
-        <p><strong>Phone:</strong> {roommate.contactInfo || "N/A"}</p>
-        <p><strong>Email:</strong> {roommate.userEmail}</p>
+        <h2 className="text-lg font-semibold text-gray-800 mb-2">
+          Contact Information
+        </h2>
+        <p>
+          <strong>Phone:</strong> {show ? roommate.contactInfo:"Like be Required" }
+        </p>
+        <p>
+          <strong>Email:</strong> {roommate.userEmail}
+        </p>
       </div>
 
       {/* Extra Services (Static Demo) */}
       <div className="bg-blue-50 p-6 rounded shadow mb-6">
-        <h2 className="text-lg font-semibold text-blue-800 mb-2">Services & Facilities</h2>
+        <h2 className="text-lg font-semibold text-blue-800 mb-2">
+          Services & Facilities
+        </h2>
         <ul className="list-disc list-inside text-blue-700 space-y-1">
           <li>Online food delivery</li>
           <li>Clothes ironing service</li>

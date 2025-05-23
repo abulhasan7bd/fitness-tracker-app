@@ -21,8 +21,8 @@ const OptimizationBox = () => {
   };
 
   return (
-    <div className="mx-auto bg-white shadow-lg rounded-2xl p-6 mt-10">
-      <h2 className="text-4xl font-bold mb-4 text-center text-blue-600">
+    <div className="mx-auto dark:text-gray-900 bg-white shadow-lg rounded-2xl p-6 mt-10">
+      <h2 className="text-4xl font-bold mb-4 text-center text-blue-600 dark:text-gray-900">
         🛠 Optimization Feedback
       </h2>
       <p className="text-gray-600 text-center mb-6">

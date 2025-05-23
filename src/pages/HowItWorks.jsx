@@ -58,7 +58,7 @@ const HowItWorks = () => {
   return (
     <section
       id="how-it-works"
-      className={`max-w-4xl mx-auto p-8 my-20 bg-white rounded-xl shadow-lg transition-all duration-700 ease-in-out ${
+      className={`dark:text-gray-900 max-w-4xl mx-auto p-8 my-20 bg-white rounded-xl shadow-lg transition-all duration-700 ease-in-out ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
     >

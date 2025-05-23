@@ -1,11 +1,17 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+@custom-variant dark (&:where(.dark, .dark *));
 @theme {
   --font-display: "Satoshi", "sans-serif";
   --font-poppins: "Poppins", sans-serif;
 }
 
+@layer theme{
+  .dard {
+    @apply bg-red-300
+  }
+}
 @layer utilities {
   .profile p{
     display: none;

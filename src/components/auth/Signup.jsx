@@ -1,48 +1,77 @@
 import React from "react";
-import { use } from "react";
-import { AuthContext } from "../../context/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../../../firebase.init";
 import Swal from "sweetalert2";
-const SignIn = () => {
-  const { googleRegister, accountCreate, setLogin } = use(AuthContext);
+import UseAuth from "../../hooks/UseAuth";
+const Signup = () => {
+  const { googleRegister, accountCreate, setLogin } = UseAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const redirect = location.state?.from.pathname || "/";
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-    try {
-      await accountCreate(data.email, data.password);
-      await updateProfile(auth.currentUser, {
-        displayName: data.name,
-        photoURL: data.photoURL,
-      });
-      // localStorage.setItem("user", JSON.stringify(true));
-      // setLogin(true);
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Your account Login",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      navigate("/login");
-    } catch (err) {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Account already exists. Try signing in or use another email.",
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      console.log("Error:", err.message);
+  const form = e.target;
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+
+  try {
+    // Step 1: Create account with Firebase
+    await accountCreate(data.email, data.password);
+
+    // Step 2: Update Firebase user profile
+    await updateProfile(auth.currentUser, {
+      displayName: data.name,
+      photoURL: data.photoURL,
+    });
+
+    // Step 3: Save user to backend database
+    const userToSave = {
+      name: data.name,
+      email: data.email,
+      photoURL: data.photoURL,
+      role: "member", // default role
+    };
+
+    const res = await fetch("http://localhost:5000/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userToSave),
+    });
+
+    const result = await res.json();
+
+    if (!res.ok) {
+      throw new Error(result.message || "Failed to save user to database.");
     }
-  };
+
+    // Step 4: Show success message & redirect
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Account created successfully!",
+      showConfirmButton: false,
+      timer: 1500,
+    }).then(() => {
+      navigate("/");
+    });
+
+  } catch (err) {
+    console.error("Error:", err.message);
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: "Account creation failed!",
+      text: err.message || "Something went wrong.",
+      showConfirmButton: false,
+      timer: 2000,
+    });
+  }
+};
+
 
   const handleGoogleLogin = () => {
     googleRegister()
@@ -142,4 +171,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Signup;

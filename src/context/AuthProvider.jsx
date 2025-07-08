@@ -10,63 +10,51 @@ import {
 import { auth } from "./../../firebase.init";
 import { useEffect } from "react";
 import { useState } from "react";
+
 const AuthProvider = ({ children }) => {
-  // state defined
+  // Define states for user
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  //  SIGN IN GOOGLE
+  // Function to sign in with Google popup
   const googleRegister = () => {
+    setLoading(true)
     const provider = new GoogleAuthProvider();
     return signInWithPopup(auth, provider);
   };
 
-  // LOGIN GMAIL & PASSWORD
+  // Function to log in with email and password
   const userLogin = (email, password) => {
+    setLoading(true)
     return signInWithEmailAndPassword(auth, email, password);
   };
-  //   ACCOUNT CREATE EMAIL & PASSWORD
+
+  // Function to create an account with email and password
   const accountCreate = (email, password) => {
+    setLoading(true)
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
+  // Listen to Firebase auth state changes and update states accordingly
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-        localStorage.setItem("user", JSON.stringify(false));
-        setLogin(false);
-      }
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
-  const [login, setLogin] = useState(false);
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setLogin(JSON.parse(storedUser));
-    } else {
-      setLogin(false);
-    }
-  }, []);
-
   const userInfo = {
-    name: "abulhasan",
+    owener: "abulhasan",
     googleRegister,
     user,
     accountCreate,
     userLogin,
     loading,
     setLoading,
-    login,
-    setLogin,
   };
+
   return <AuthContext value={userInfo}>{children}</AuthContext>;
 };
 

@@ -1,9 +1,9 @@
-import React, { use } from "react";
+import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
+import UseAuth from "../../hooks/UseAuth";
 const Login = () => {
-  const { userLogin, googleRegister, setLogin } = use(AuthContext);
+  const { userLogin, googleRegister, setLogin } = UseAuth();
   const location = useLocation();
   const redirect = location.state?.from.pathname || "/";
   const navigate = useNavigate();
@@ -15,8 +15,6 @@ const Login = () => {
     userLogin(data.email, data.password)
       .then((res) => {
         console.log(res);
-        localStorage.setItem("user", JSON.stringify(true));
-        setLogin(true);
         Swal.fire({
           position: "center",
           icon: "success",
@@ -25,17 +23,15 @@ const Login = () => {
           timer: 1500,
         });
         navigate("/");
-
       })
       .catch(() => {
-          Swal.fire({
+        Swal.fire({
           position: "center",
           icon: "error",
           title: "Your account Not Found please try again !",
           showConfirmButton: false,
           timer: 1500,
         });
-      
       });
   };
 
@@ -43,7 +39,6 @@ const Login = () => {
     googleRegister()
       .then((res) => {
         console.log(res);
-        localStorage.setItem("user", JSON.stringify(true));
         setLogin(true);
         navigate(`${redirect}`);
         Swal.fire({
@@ -113,8 +108,8 @@ const Login = () => {
           {/* Register Redirect */}
           <p className="text-center">
             Don't have an account?{" "}
-            <Link to="/register" className="text-blue-600 hover:underline">
-              Sign In
+            <Link to="/signup" className="text-blue-600 hover:underline">
+              Register
             </Link>
           </p>
         </fieldset>

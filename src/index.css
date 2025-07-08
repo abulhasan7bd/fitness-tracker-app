@@ -1,19 +1,18 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
-@custom-variant dark (&:where(.dark, .dark *));
 @theme {
-  --font-display: "Satoshi", "sans-serif";
-  --font-poppins: "Poppins", sans-serif;
+  --font-Roboto: "Roboto", sans-serif;
 }
 
-@layer theme{
+@layer theme {
   .dard {
-    @apply bg-red-300
+    @apply bg-red-300;
   }
 }
 @layer utilities {
-  .profile p{
+  .profile p {
     display: none;
   }
 

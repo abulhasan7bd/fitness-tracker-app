@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signOut as firebaseSignOut } from "firebase/auth";
 import { auth } from "../../../firebase.init";
 import Swal from "sweetalert2";
 import UseAuth from "../../hooks/UseAuth";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoMdClose } from "react-icons/io";
 
 const Navbar = () => {
   const { user } = UseAuth();
-  console.log(user);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // user logout
   const handleLogout = () => {
     firebaseSignOut(auth)
       .then(() => {
@@ -20,79 +21,152 @@ const Navbar = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        console.log("Sign-out successful.");
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
   };
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <nav className="bg-white text-black sticky top-0 shadow-md w-full z-50">
-      <div className="navbar max-w-7xl mx-auto px-4 py-3 flex justify-between items-center font-Roboto">
-        {/* Left: Logo */}
-        <div className="flex-1">
-          <Link to="/" className="text-2xl font-bold text-primary">
-            FitTrack
-          </Link>
-        </div>
-       <div>
-         <Link to="/forum" className=" hover:text-primary mr-[1rem] transition-all">
-          Forum
+      <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center font-Roboto">
+        {/* Logo */}
+        <Link to="/" className="text-2xl font-bold text-primary">
+          FitTrack
         </Link>
-       </div>
-        {/* Middle: Nav Links */}
-        <div className="hidden md:flex items-center gap-6">
-          <Link to="/" className="hover:text-primary transition-all">
+
+        {/* Mobile Toggle Button */}
+        <button
+          onClick={toggleMenu}
+          className="md:hidden px-3 py-2 border rounded text-primary border-primary"
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? <IoMdClose size={24} /> : <GiHamburgerMenu size={24} />}
+        </button>
+
+        {/* Desktop Links */}
+        <div className="hidden md:flex gap-6 items-center">
+          <Link to="/" className="hover:text-primary transition">
             Home
           </Link>
-          <Link to="/trainers" className="hover:text-primary transition-all">
+          <Link to="/trainers" className="hover:text-primary transition">
             All Trainers
           </Link>
-          <Link to="/classes" className="hover:text-primary transition-all">
+          <Link to="/classes" className="hover:text-primary transition">
             All Classes
           </Link>
-          <Link to="/community" className="hover:text-primary transition-all">
-            Community
+          <Link to="/forum" className="hover:text-primary transition">
+            Forums
           </Link>
-
           {user && (
-            <Link to="/dashboard" className="hover:text-primary transition-all">
+            <Link to="/dashboard" className="hover:text-primary transition">
               Dashboard
             </Link>
           )}
-        </div>
-
-        {/* Right: Auth + Profile */}
-        <div className="flex items-center gap-2">
           {user ? (
-            <>
+            <div className="flex items-center gap-3">
               <button
                 onClick={handleLogout}
-                className="btn btn-outline btn-sm rounded-2xl bg-black text-white px-4 ml-2"
+                className="btn btn-sm bg-black text-white rounded-2xl px-4"
               >
                 Logout
               </button>
-              <div className="w-16 h-16 rounded-full  p-1 shadow-md">
+              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary shadow-md">
                 <img
-                  src={user?.photoURL}
-                  alt="User-Profile"
-                  className="w-full h-full object-cover rounded-full"
+                  src={user.photoURL || "https://via.placeholder.com/150"}
+                  alt="Profile"
+                  className="w-full h-full object-cover"
                 />
               </div>
-            </>
+            </div>
           ) : (
-            <>
-              <Link
-                to="/login"
-                className="btn btn-outline btn-sm rounded-2xl bg-black text-white px-6 ml-2 font-bold"
-              >
-                Login
-              </Link>
-            </>
+            <Link
+              to="/login"
+              className="btn btn-sm bg-black text-white rounded-2xl px-6 font-bold"
+            >
+              Login
+            </Link>
           )}
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden flex flex-col bg-white h-screen px-4 pt-4">
+          {/* Profile */}
+          {user && (
+            <div className="w-full flex justify-center mb-6">
+              <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-primary shadow-lg">
+                <img
+                  src={user.photoURL || "https://via.placeholder.com/150"}
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Links */}
+          <div className="flex flex-col gap-3">
+            <Link
+              to="/"
+              onClick={toggleMenu}
+              className="py-2 hover:text-primary"
+            >
+              Home
+            </Link>
+            <Link
+              to="/trainers"
+              onClick={toggleMenu}
+              className="py-2 hover:text-primary"
+            >
+              All Trainers
+            </Link>
+            <Link
+              to="/classes"
+              onClick={toggleMenu}
+              className="py-2 hover:text-primary"
+            >
+              All Classes
+            </Link>
+            <Link
+              to="/forum"
+              onClick={toggleMenu}
+              className="py-2 hover:text-primary"
+            >
+              Forums
+            </Link>
+            {user && (
+              <Link
+                to="/dashboard"
+                onClick={toggleMenu}
+                className="py-2 hover:text-primary"
+              >
+                Dashboard
+              </Link>
+            )}
+            {user ? (
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setIsMenuOpen(false);
+                }}
+                className="btn btn-sm bg-black text-white rounded-2xl w-full"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                onClick={toggleMenu}
+                className="btn btn-sm bg-black text-white rounded-2xl w-full text-center font-bold"
+              >
+                Login
+              </Link>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

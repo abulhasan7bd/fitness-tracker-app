@@ -19,6 +19,7 @@ import AddNewSlot from "../pages/dashboard/trainer/AddNewSlot";
 import ActivityLog from "../pages/dashboard/member/ActivityLog";
 import ProfilePage from "../pages/dashboard/member/ProfilePage";
 import BookedTrainer from "../pages/dashboard/member/BookedTrainer";
+import NotFound from "../pages/notFound/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       { path: "profile", element: <ProfilePage /> },
       { path: "booked-trainer", element: <BookedTrainer /> },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 

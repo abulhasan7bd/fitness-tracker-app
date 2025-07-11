@@ -36,7 +36,11 @@ const Navbar = () => {
             FitTrack
           </Link>
         </div>
-
+       <div>
+         <Link to="/forum" className=" hover:text-primary mr-[1rem] transition-all">
+          Forum
+        </Link>
+       </div>
         {/* Middle: Nav Links */}
         <div className="hidden md:flex items-center gap-6">
           <Link to="/" className="hover:text-primary transition-all">
@@ -85,7 +89,6 @@ const Navbar = () => {
               >
                 Login
               </Link>
-             
             </>
           )}
         </div>

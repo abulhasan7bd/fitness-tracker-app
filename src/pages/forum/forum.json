@@ -1,0 +1,72 @@
+[
+  {
+    "id": "p1",
+    "title": "How to improve flexibility?",
+    "content": "I've been doing yoga for a month but not seeing much improvement. Any tips?",
+    "upVotes": 10,
+    "downVotes": 2
+  },
+  {
+    "id": "p2",
+    "title": "Is protein powder necessary?",
+    "content": "Can I build muscle without using protein supplements?",
+    "upVotes": 15,
+    "downVotes": 3
+  },
+  {
+    "id": "p3",
+    "title": "Daily stretching routine?",
+    "content": "Looking for a simple daily routine to reduce stiffness.",
+    "upVotes": 8,
+    "downVotes": 1
+  },
+  {
+    "id": "p4",
+    "title": "Best home workout apps?",
+    "content": "Any recommendations for free home workout apps?",
+    "upVotes": 12,
+    "downVotes": 4
+  },
+  {
+    "id": "p5",
+    "title": "Is fasting safe while working out?",
+    "content": "Intermittent fasting and daily exercise – good or bad?",
+    "upVotes": 20,
+    "downVotes": 2
+  },
+  {
+    "id": "p6",
+    "title": "Stretching before or after workout?",
+    "content": "Should I stretch before or after lifting weights?",
+    "upVotes": 9,
+    "downVotes": 0
+  },
+  {
+    "id": "p7",
+    "title": "How to deal with gym anxiety?",
+    "content": "I feel uncomfortable in the gym. What should I do?",
+    "upVotes": 7,
+    "downVotes": 1
+  },
+  {
+    "id": "p8",
+    "title": "Tips for staying consistent",
+    "content": "How do you stay motivated to exercise regularly?",
+    "upVotes": 13,
+    "downVotes": 0
+  },
+  {
+    "id": "p9",
+    "title": "Running vs Walking",
+    "content": "Is walking just as effective as running?",
+    "upVotes": 11,
+    "downVotes": 2
+  },
+  {
+    "id": "p10",
+    "title": "How much water per day?",
+    "content": "How much water should I drink during workouts?",
+    "upVotes": 14,
+    "downVotes": 1
+  }
+]

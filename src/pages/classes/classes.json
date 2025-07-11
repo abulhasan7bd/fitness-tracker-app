@@ -1,0 +1,84 @@
+[
+  {
+    "id": "class1",
+    "title": "Yoga",
+    "description": "Relax and stretch with guided yoga sessions.",
+    "trainers": [
+      { "id": "t1", "name": "Alice", "image": "https://i.pravatar.cc/150?img=1" },
+      { "id": "t2", "name": "Bob", "image": "https://i.pravatar.cc/150?img=2" }
+    ]
+  },
+  {
+    "id": "class2",
+    "title": "Zumba",
+    "description": "Dance your way to fitness with fun Zumba workouts.",
+    "trainers": [
+      { "id": "t3", "name": "Chloe", "image": "https://i.pravatar.cc/150?img=3" },
+      { "id": "t4", "name": "David", "image": "https://i.pravatar.cc/150?img=4" }
+    ]
+  },
+  {
+    "id": "class3",
+    "title": "HIIT",
+    "description": "High intensity workouts for fat burn and endurance.",
+    "trainers": [
+      { "id": "t5", "name": "Ella", "image": "https://i.pravatar.cc/150?img=5" }
+    ]
+  },
+  {
+    "id": "class4",
+    "title": "Pilates",
+    "description": "Improve your core and flexibility with pilates.",
+    "trainers": [
+      { "id": "t6", "name": "Fiona", "image": "https://i.pravatar.cc/150?img=6" }
+    ]
+  },
+  {
+    "id": "class5",
+    "title": "Cardio Kickboxing",
+    "description": "Burn calories fast with kickboxing cardio.",
+    "trainers": [
+      { "id": "t7", "name": "George", "image": "https://i.pravatar.cc/150?img=7" }
+    ]
+  },
+  {
+    "id": "class6",
+    "title": "Spin Class",
+    "description": "Cycle your way to fitness with intense spin sessions.",
+    "trainers": [
+      { "id": "t8", "name": "Hannah", "image": "https://i.pravatar.cc/150?img=8" }
+    ]
+  },
+  {
+    "id": "class7",
+    "title": "Strength Training",
+    "description": "Build strength with resistance and weights.",
+    "trainers": [
+      { "id": "t9", "name": "Ivan", "image": "https://i.pravatar.cc/150?img=9" }
+    ]
+  },
+  {
+    "id": "class8",
+    "title": "Meditation",
+    "description": "Calm your mind and reduce stress with guided meditation.",
+    "trainers": [
+      { "id": "t10", "name": "Jake", "image": "https://i.pravatar.cc/150?img=10" }
+    ]
+  },
+  {
+    "id": "class9",
+    "title": "Bodyweight Bootcamp",
+    "description": "Full-body training without equipment.",
+    "trainers": [
+      { "id": "t1", "name": "Alice", "image": "https://i.pravatar.cc/150?img=1" }
+    ]
+  },
+  {
+    "id": "class10",
+    "title": "CrossFit",
+    "description": "Functional strength and endurance with CrossFit.",
+    "trainers": [
+      { "id": "t2", "name": "Bob", "image": "https://i.pravatar.cc/150?img=2" }
+    ]
+  }
+]

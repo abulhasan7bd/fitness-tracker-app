@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [user]);
 
   const userInfo = {
     owener: "abulhasan",

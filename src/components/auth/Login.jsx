@@ -2,8 +2,9 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import UseAuth from "../../hooks/UseAuth";
+import SocilaLogin from "./SocilaLogin";
 const Login = () => {
-  const { userLogin, googleRegister, setLogin } = UseAuth();
+  const { userLogin } = UseAuth();
   const location = useLocation();
   const redirect = location.state?.from.pathname || "/";
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/");
+        navigate(redirect);
       })
       .catch(() => {
         Swal.fire({
@@ -33,23 +34,6 @@ const Login = () => {
           timer: 1500,
         });
       });
-  };
-
-  const handleGoogleLogin = () => {
-    googleRegister()
-      .then((res) => {
-        console.log(res);
-        setLogin(true);
-        navigate(`${redirect}`);
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Your account is Login",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      })
-      .catch((err) => console.log(err));
   };
 
   return (
@@ -97,13 +81,7 @@ const Login = () => {
           <div className="divider">OR</div>
 
           {/* Google Login */}
-          <button
-            type="button"
-            onClick={handleGoogleLogin}
-            className="btn btn-outline w-full mb-4"
-          >
-            Continue with Google
-          </button>
+          <SocilaLogin />
 
           {/* Register Redirect */}
           <p className="text-center">

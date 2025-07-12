@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signOut as firebaseSignOut } from "firebase/auth";
 import { auth } from "../../../firebase.init";
 import Swal from "sweetalert2";
 import UseAuth from "../../hooks/UseAuth";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
+import UseAdmin from "./../../hooks/UseAdmin";
 
 const Navbar = () => {
   const { user } = UseAuth();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { userInfo } = UseAdmin();
+  const navigate = useNavigate()
+  console.log(user);
+  console.log(userInfo);
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const handleLogout = () => {
     firebaseSignOut(auth)
       .then(() => {
@@ -21,6 +26,7 @@ const Navbar = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        navigate("/login")
       })
       .catch((error) => console.log(error));
   };

@@ -20,6 +20,7 @@ import ActivityLog from "../pages/dashboard/member/ActivityLog";
 import ProfilePage from "../pages/dashboard/member/ProfilePage";
 import BookedTrainer from "../pages/dashboard/member/BookedTrainer";
 import NotFound from "../pages/notFound/NotFound";
+import PrivateRoute from "../routes/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,14 @@ const router = createBrowserRouter([
       { path: "/signup", element: <Signup /> },
       { path: "/about", element: <h3>about</h3> },
       { path: "/contact", element: <h3>Contact</h3> },
-      { path: "/trainers", element: <AlltrainerPage /> },
+      {
+        path: "/trainers",
+        element: (
+          <PrivateRoute>
+            <AlltrainerPage />
+          </PrivateRoute>
+        ),
+      },
       { path: "/trainers/:id", element: <TrainerDetail /> },
       { path: "/booking/:id", element: <TrainerBooking /> },
       { path: "/payment", element: <Paymentpage /> },

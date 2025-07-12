@@ -4,80 +4,76 @@ import { updateProfile } from "firebase/auth";
 import { auth } from "../../../firebase.init";
 import Swal from "sweetalert2";
 import UseAuth from "../../hooks/UseAuth";
+import UseAxios from "../../hooks/UseAxios";
+
 const Signup = () => {
   const { googleRegister, accountCreate, setLogin } = UseAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const redirect = location.state?.from.pathname || "/";
- const handleSubmit = async (e) => {
-  e.preventDefault();
+  const useAxiso = UseAxios();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const form = e.target;
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData.entries());
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
 
-  try {
-    // Step 1: Create account with Firebase
-    await accountCreate(data.email, data.password);
+    try {
+      // Step 1: Create account with Firebase
+      await accountCreate(data.email, data.password);
 
-    // Step 2: Update Firebase user profile
-    await updateProfile(auth.currentUser, {
-      displayName: data.name,
-      photoURL: data.photoURL,
-    });
+      // Step 2: Update Firebase user profile
+      await updateProfile(auth.currentUser, {
+        displayName: data.name,
+        photoURL: data.photoURL,
+      });
 
-    // Step 3: Save user to backend database
-    const userToSave = {
-      name: data.name,
-      email: data.email,
-      photoURL: data.photoURL,
-      role: "member", // default role
-    };
+      // Step 3: Save user to backend database
+      const userToSave = {
+        name: data.name,
+        email: data.email,
+        photoURL: data.photoURL,
+        role: "member",
+      };
 
-    const res = await fetch("http://localhost:5000/user", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userToSave),
-    });
+      // server save user information
+      useAxiso
+        .post("/user", userToSave)
+        .then((response) => {
+          console.log("User saved successfully:", response.data);
+        })
+        .catch((error) => {
+          console.error("Error saving user:", error.message);
+        });
 
-    const result = await res.json();
-
-    if (!res.ok) {
-      throw new Error(result.message || "Failed to save user to database.");
+      // Step 4: Show success message & redirect
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Account created successfully!",
+        showConfirmButton: false,
+        timer: 1500,
+      }).then(() => {
+        navigate("/");
+      });
+    } catch (err) {
+      console.error("Error:", err.message);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Account creation failed!",
+        text: err.message || "Something went wrong.",
+        showConfirmButton: false,
+        timer: 2000,
+      });
     }
-
-    // Step 4: Show success message & redirect
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Account created successfully!",
-      showConfirmButton: false,
-      timer: 1500,
-    }).then(() => {
-      navigate("/");
-    });
-
-  } catch (err) {
-    console.error("Error:", err.message);
-    Swal.fire({
-      position: "center",
-      icon: "error",
-      title: "Account creation failed!",
-      text: err.message || "Something went wrong.",
-      showConfirmButton: false,
-      timer: 2000,
-    });
-  }
-};
-
+  };
 
   const handleGoogleLogin = () => {
     googleRegister()
       .then((res) => {
         console.log(res);
-        localStorage.setItem("user", JSON.stringify(true));
         setLogin(true);
         Swal.fire({
           position: "center",

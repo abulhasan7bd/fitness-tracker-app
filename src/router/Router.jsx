@@ -24,6 +24,7 @@ import PrivateRoute from "../routes/PrivateRoute";
 import ForumPosts from "../pages/forum/ForumComponents/ForumPosts";
 import ManageSlots from "../pages/dashboard/trainer/ManageSlots";
 import DashBoardHome from "../layouts/DashBoardHome";
+import ApplyedTrainer from "../pages/dashboard/applyed/ApplyedTrainer";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,7 @@ const router = createBrowserRouter([
       { path: "activity-log", element: <ActivityLog /> },
       { path: "profile", element: <ProfilePage /> },
       { path: "booked-trainer", element: <BookedTrainer /> },
+      { path: "appliedTrainer", element: <ApplyedTrainer /> },
     ],
   },
   {

@@ -70,8 +70,8 @@ const Be_a_Trainer = () => {
         if (res.data.acknowledged) {
           Swal.fire({
             icon: "success",
-            title: "Success!",
-            text: "Trainer application submitted successfully.",
+            title: "Thank You!",
+            text: "Your trainer application has been submitted successfully. Our team will review it and notify you soon.",
             confirmButtonColor: "#10B981",
           }).then((res) => {
             console.log(res);

@@ -63,7 +63,7 @@ const DashBoardLayout = () => {
                 <FaCalendarPlus /> Delete a Trainer
               </Link>
               <Link
-                to="/appliedTrainer"
+                to="/dashboard/appliedTrainer"
                 className="flex items-center gap-2 text-gray-700 hover:text-blue-600"
               >
                 <FaCalendarPlus /> Applied Trainer

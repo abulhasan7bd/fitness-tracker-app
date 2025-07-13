@@ -2,6 +2,9 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 import UseAuth from "../../../hooks/UseAuth";
+import UseAxios from "./../../../hooks/UseAxios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const skillOptions = [
   "Cardio",
@@ -23,6 +26,8 @@ const dayOptions = [
 
 const Be_a_Trainer = () => {
   const { user } = UseAuth();
+  const useAxios = UseAxios();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -56,7 +61,30 @@ const Be_a_Trainer = () => {
       email: user?.email,
       status: "pending",
     };
-    console.log("Trainer Submitted:", finalData);
+
+    // server save Be a Trainer
+    useAxios
+
+      .post("/beatrainer", finalData)
+      .then((res) => {
+        if (res.data.acknowledged) {
+          Swal.fire({
+            icon: "success",
+            title: "Success!",
+            text: "Trainer application submitted successfully.",
+            confirmButtonColor: "#10B981",
+          }).then((res) => {
+            console.log(res);
+            if (res.isConfirmed) {
+              navigate("/");
+            }
+          });
+        }
+        console.log("Be a Trainer Data Save in the Database", res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   return (

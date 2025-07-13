@@ -11,10 +11,11 @@ import UseAdmin from "./../../hooks/UseAdmin";
 const Navbar = () => {
   const { user } = UseAuth();
   const { userInfo } = UseAdmin();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   console.log(user);
-  console.log(userInfo);
+  const role_info = userInfo[0]?.role;
 
+  console.log(role_info);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const handleLogout = () => {
     firebaseSignOut(auth)
@@ -26,7 +27,7 @@ const Navbar = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/login")
+        navigate("/login");
       })
       .catch((error) => console.log(error));
   };
@@ -55,6 +56,8 @@ const Navbar = () => {
           <Link to="/" className="hover:text-primary transition">
             Home
           </Link>
+          {/* Admin  */}
+       
           <Link to="/trainers" className="hover:text-primary transition">
             All Trainers
           </Link>
@@ -64,6 +67,10 @@ const Navbar = () => {
           <Link to="/forum" className="hover:text-primary transition">
             Forums
           </Link>
+
+          {/* Trainer  */}
+          {/* Member  */}
+
           {user && (
             <Link to="/dashboard" className="hover:text-primary transition">
               Dashboard

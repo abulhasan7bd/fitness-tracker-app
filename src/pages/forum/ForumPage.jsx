@@ -1,5 +1,5 @@
  import React, { useEffect, useState } from "react";
-import dummyPosts from "./forum.json";
+import dummyPosts from "./forum";
 
 const POSTS_PER_PAGE = 6;
 

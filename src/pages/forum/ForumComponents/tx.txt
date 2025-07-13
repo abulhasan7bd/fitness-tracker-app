@@ -1,0 +1,31 @@
+setPosts((prevPosts) =>
+      prevPosts.map((post) => {
+        if (post._id === postId) {
+          const alreadyUp = post.votes.up.includes("guest");
+          const alreadyDown = post.votes.down.includes("guest");
+
+          let updatedVotes = { ...post.votes };
+
+          if (type === "up") {
+            if (alreadyUp) {
+              updatedVotes.up = updatedVotes.up.filter((u) => u !== "guest");
+            } else {
+              updatedVotes.up = [...updatedVotes.up, "guest"];
+              updatedVotes.down = updatedVotes.down.filter((d) => d !== "guest");
+            }
+          }
+
+          if (type === "down") {
+            if (alreadyDown) {
+              updatedVotes.down = updatedVotes.down.filter((d) => d !== "guest");
+            } else {
+              updatedVotes.down = [...updatedVotes.down, "guest"];
+              updatedVotes.up = updatedVotes.up.filter((u) => u !== "guest");
+            }
+          }
+
+          return { ...post, votes: updatedVotes };
+        }
+        return post;
+      })
+    );

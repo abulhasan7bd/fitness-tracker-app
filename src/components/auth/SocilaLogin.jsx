@@ -19,7 +19,10 @@ const SocilaLogin = () => {
         name: user?.displayName,
         email: user?.email,
         photoURL: user?.photoURL,
-        role: "member",
+        //  Admin  Trainer  Member (default)
+        // role: "Admin",
+        // role: "Trainer",
+        role: "Member",
       };
 
       // Save user to server

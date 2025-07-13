@@ -1,84 +1,152 @@
 [
   {
-    "id": "class1",
+    "id": "class001",
     "title": "Yoga",
-    "description": "Relax and stretch with guided yoga sessions.",
+    "description": "Improve flexibility, balance, and mindfulness with guided yoga sessions.",
+    "schedule": "Mon, Wed, Fri - 7:00 AM",
+    "level": "Beginner",
     "trainers": [
-      { "id": "t1", "name": "Alice", "image": "https://i.pravatar.cc/150?img=1" },
-      { "id": "t2", "name": "Bob", "image": "https://i.pravatar.cc/150?img=2" }
+      { "id": "trainer101", "name": "Ayesha Rahman", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" },
+      { "id": "trainer102", "name": "Farhan Ali", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" }
     ]
   },
   {
-    "id": "class2",
+    "id": "class002",
     "title": "Zumba",
-    "description": "Dance your way to fitness with fun Zumba workouts.",
+    "description": "High-energy dance workout to burn calories and boost mood.",
+    "schedule": "Tue, Thu - 6:00 PM",
+    "level": "Intermediate",
     "trainers": [
-      { "id": "t3", "name": "Chloe", "image": "https://i.pravatar.cc/150?img=3" },
-      { "id": "t4", "name": "David", "image": "https://i.pravatar.cc/150?img=4" }
+      { "id": "trainer103", "name": "Nadia Islam", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" },
+      { "id": "trainer104", "name": "Rashed Khan", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" },
+      { "id": "trainer105", "name": "Samira Hossain", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" }
     ]
   },
   {
-    "id": "class3",
-    "title": "HIIT",
-    "description": "High intensity workouts for fat burn and endurance.",
-    "trainers": [
-      { "id": "t5", "name": "Ella", "image": "https://i.pravatar.cc/150?img=5" }
-    ]
-  },
-  {
-    "id": "class4",
-    "title": "Pilates",
-    "description": "Improve your core and flexibility with pilates.",
-    "trainers": [
-      { "id": "t6", "name": "Fiona", "image": "https://i.pravatar.cc/150?img=6" }
-    ]
-  },
-  {
-    "id": "class5",
-    "title": "Cardio Kickboxing",
-    "description": "Burn calories fast with kickboxing cardio.",
-    "trainers": [
-      { "id": "t7", "name": "George", "image": "https://i.pravatar.cc/150?img=7" }
-    ]
-  },
-  {
-    "id": "class6",
-    "title": "Spin Class",
-    "description": "Cycle your way to fitness with intense spin sessions.",
-    "trainers": [
-      { "id": "t8", "name": "Hannah", "image": "https://i.pravatar.cc/150?img=8" }
-    ]
-  },
-  {
-    "id": "class7",
+    "id": "class003",
     "title": "Strength Training",
-    "description": "Build strength with resistance and weights.",
+    "description": "Build muscle and endurance through weight-based training.",
+    "schedule": "Daily - 5:00 PM",
+    "level": "Advanced",
     "trainers": [
-      { "id": "t9", "name": "Ivan", "image": "https://i.pravatar.cc/150?img=9" }
+      { "id": "trainer106", "name": "Tanvir Ahmed", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" }
     ]
   },
   {
-    "id": "class8",
-    "title": "Meditation",
-    "description": "Calm your mind and reduce stress with guided meditation.",
+    "id": "class004",
+    "title": "Pilates",
+    "description": "Enhance core strength and posture with low-impact exercises.",
+    "schedule": "Mon, Fri - 9:00 AM",
+    "level": "Beginner",
     "trainers": [
-      { "id": "t10", "name": "Jake", "image": "https://i.pravatar.cc/150?img=10" }
+      { "id": "trainer107", "name": "Mitu Sultana", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" },
+      { "id": "trainer108", "name": "Arif Hasan", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" }
     ]
   },
   {
-    "id": "class9",
-    "title": "Bodyweight Bootcamp",
-    "description": "Full-body training without equipment.",
+    "id": "class005",
+    "title": "HIIT",
+    "description": "Intense workout routines with short rest periods to maximize fat burn.",
+    "schedule": "Tue, Thu - 7:30 AM",
+    "level": "Advanced",
     "trainers": [
-      { "id": "t1", "name": "Alice", "image": "https://i.pravatar.cc/150?img=1" }
+      { "id": "trainer109", "name": "Tania Haque", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" },
+      { "id": "trainer110", "name": "Mehedi Hasan", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" }
     ]
   },
   {
-    "id": "class10",
+    "id": "class006",
     "title": "CrossFit",
-    "description": "Functional strength and endurance with CrossFit.",
+    "description": "Functional fitness program combining strength and cardio.",
+    "schedule": "Daily - 6:00 PM",
+    "level": "Intermediate",
     "trainers": [
-      { "id": "t2", "name": "Bob", "image": "https://i.pravatar.cc/150?img=2" }
+      { "id": "trainer111", "name": "Rafiul Islam", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" },
+      { "id": "trainer112", "name": "Lubna Chowdhury", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" }
+    ]
+  },
+  {
+    "id": "class007",
+    "title": "Cycling",
+    "description": "Indoor cycling to improve cardio and burn calories.",
+    "schedule": "Wed, Sat - 8:00 AM",
+    "level": "Beginner",
+    "trainers": [
+      { "id": "trainer113", "name": "Shuvo Roy", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" }
+    ]
+  },
+  {
+    "id": "class008",
+    "title": "Boxing",
+    "description": "Cardio and strength-focused boxing training for fitness and confidence.",
+    "schedule": "Mon, Thu - 5:30 PM",
+    "level": "Intermediate",
+    "trainers": [
+      { "id": "trainer114", "name": "Salman Khan", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" },
+      { "id": "trainer115", "name": "Lamia Jahan", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" }
+    ]
+  },
+  {
+    "id": "class009",
+    "title": "Cardio Blast",
+    "description": "Heart-pumping exercises for stamina and fat burn.",
+    "schedule": "Daily - 7:00 AM",
+    "level": "Beginner",
+    "trainers": [
+      { "id": "trainer116", "name": "Junaid Haque", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" },
+      { "id": "trainer117", "name": "Shirin Akter", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" }
+    ]
+  },
+  {
+    "id": "class010",
+    "title": "Meditation",
+    "description": "Guided sessions to reduce stress and increase focus.",
+    "schedule": "Tue, Fri - 6:00 PM",
+    "level": "All Levels",
+    "trainers": [
+      { "id": "trainer118", "name": "Fahim Rahman", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" },
+      { "id": "trainer119", "name": "Sadia Noor", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" }
+    ]
+  },  {
+    "id": "class010",
+    "title": "Meditation",
+    "description": "Guided sessions to reduce stress and increase focus.",
+    "schedule": "Tue, Fri - 6:00 PM",
+    "level": "All Levels",
+    "trainers": [
+      { "id": "trainer118", "name": "Fahim Rahman", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" },
+      { "id": "trainer119", "name": "Sadia Noor", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" }
+    ]
+  },  {
+    "id": "class010",
+    "title": "Meditation",
+    "description": "Guided sessions to reduce stress and increase focus.",
+    "schedule": "Tue, Fri - 6:00 PM",
+    "level": "All Levels",
+    "trainers": [
+      { "id": "trainer118", "name": "Fahim Rahman", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" },
+      { "id": "trainer119", "name": "Sadia Noor", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" }
+    ]
+  }
+  ,  {
+    "id": "class010",
+    "title": "Meditation",
+    "description": "Guided sessions to reduce stress and increase focus.",
+    "schedule": "Tue, Fri - 6:00 PM",
+    "level": "All Levels",
+    "trainers": [
+      { "id": "trainer118", "name": "Fahim Rahman", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" },
+      { "id": "trainer119", "name": "Sadia Noor", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" }
+    ]
+  },  {
+    "id": "class010",
+    "title": "Meditation",
+    "description": "Guided sessions to reduce stress and increase focus.",
+    "schedule": "Tue, Fri - 6:00 PM",
+    "level": "All Levels",
+    "trainers": [
+      { "id": "trainer118", "name": "Fahim Rahman", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" },
+      { "id": "trainer119", "name": "Sadia Noor", "photo": "https://media.gettyimages.com/id/1432207998/photo/army-doctor-examining-refugee-children-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wSsuDx-pJqSC5QeHQvEoy250MmJiH-9foaspk_bvm0Y=" }
     ]
   }
 ]

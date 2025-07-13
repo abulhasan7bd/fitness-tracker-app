@@ -21,6 +21,9 @@ import ProfilePage from "../pages/dashboard/member/ProfilePage";
 import BookedTrainer from "../pages/dashboard/member/BookedTrainer";
 import NotFound from "../pages/notFound/NotFound";
 import PrivateRoute from "../routes/PrivateRoute";
+import ForumPosts from "../pages/forum/ForumComponents/ForumPosts";
+import ManageSlots from "../pages/dashboard/trainer/ManageSlots";
+import DashBoardHome from "../layouts/DashBoardHome";
 
 const router = createBrowserRouter([
   {
@@ -44,13 +47,15 @@ const router = createBrowserRouter([
       { path: "/booking/:id", element: <TrainerBooking /> },
       { path: "/payment", element: <Paymentpage /> },
       { path: "/classes", element: <Classes /> },
-      { path: "/forum", element: <ForumPage /> },
+      { path: "/forum", element: <ForumPosts /> },
+      // { path: "/forum", element: <ForumPage /> },
     ],
   },
   {
     path: "/dashboard",
     element: <DashBoardLayout />,
     children: [
+      {index:true,element:<DashBoardHome/>},
       { path: "profile", element: <Profile /> },
       { path: "my-bookings", element: <MyBooking /> },
       {
@@ -60,6 +65,7 @@ const router = createBrowserRouter([
       { path: "be-a-trainer/apply", element: <BeATrainerPage /> },
       { path: "add-a-new-class", element: <Add_a_New_class /> },
       { path: "add-new-slot", element: <AddNewSlot /> },
+      {path:"manage-slot" ,element:<ManageSlots/>},
       { path: "activity-log", element: <ActivityLog /> },
       { path: "profile", element: <ProfilePage /> },
       { path: "booked-trainer", element: <BookedTrainer /> },

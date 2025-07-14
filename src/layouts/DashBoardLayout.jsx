@@ -51,13 +51,13 @@ const DashBoardLayout = () => {
                 <FaCalendarPlus /> Add a New Class
               </Link>
               <Link
-                to="/allNewsSubscribers"
+                to="/dashboard/allNewsSubscribers"
                 className="flex items-center gap-2 text-gray-700 hover:text-blue-600"
               >
                 <FaCalendarPlus /> All News Subscribers
               </Link>
               <Link
-                to="/deleateAtrainer"
+                to="/dashboard/deleateAtrainer"
                 className="flex items-center gap-2 text-gray-700 hover:text-blue-600"
               >
                 <FaCalendarPlus /> Delete a Trainer
@@ -69,7 +69,13 @@ const DashBoardLayout = () => {
                 <FaCalendarPlus /> Applied Trainer
               </Link>
               <Link
-                to="/balance"
+                to="/dashboard/new-forum"
+                className="flex items-center gap-2 text-gray-700 hover:text-blue-600"
+              >
+                <FaCalendarPlus /> Add a New Forum
+              </Link>
+              <Link
+                to="/dashboard/balance"
                 className="flex items-center gap-2 text-gray-700 hover:text-blue-600"
               >
                 <FaCalendarPlus />

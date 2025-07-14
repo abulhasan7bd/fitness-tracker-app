@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import Select from "react-select";
+import UseAuth from "../../../hooks/UseAuth";
+import { useQuery } from "@tanstack/react-query";
+import UseAxios from "../../../hooks/UseAxios";
 
 // Dummy trainer info (fetched from trainer application form)
 const trainerInfo = {
@@ -28,6 +31,22 @@ const dayOptions = [
 ];
 
 const AddNewSlot = () => {
+  const { user } = UseAuth();
+  const useAxiso = UseAxios();
+  const {
+    data: trainer = {},
+    isLoading,
+    error,
+  } = useQuery({
+    enabled: !!user?.email,
+    queryKey: ["trainer", user?.email],
+    queryFn: async () => {
+      const res = await useAxiso.get(`/beatriner/${user.email}`);
+      return res.data;
+    },
+  });
+  console.log("user", user);
+  console.log("trainer", trainer);
   const [form, setForm] = useState({
     slotName: "",
     slotTime: "",
@@ -64,6 +83,12 @@ const AddNewSlot = () => {
     });
   };
 
+  if (isLoading) {
+    return <h2>Loaing....</h2>;
+  }
+  if (error) {
+    return <p className="text-red">{error.message}</p>;
+  }
   return (
     <div className="max-w-3xl mx-auto p-6">
       <h2 className="text-2xl font-bold mb-4">Add New Slot</h2>
@@ -73,7 +98,7 @@ const AddNewSlot = () => {
         <div>
           <label className="block font-medium">Full Name</label>
           <input
-            value={trainerInfo.fullName}
+            value={user?.displayName}
             readOnly
             className="w-full border px-3 py-2 rounded bg-gray-100"
           />
@@ -82,7 +107,7 @@ const AddNewSlot = () => {
         <div>
           <label className="block font-medium">Email</label>
           <input
-            value={trainerInfo.email}
+            value={user?.email}
             readOnly
             className="w-full border px-3 py-2 rounded bg-gray-100"
           />

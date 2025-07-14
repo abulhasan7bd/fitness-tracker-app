@@ -6,17 +6,15 @@ import Swal from "sweetalert2";
 import UseAuth from "../../hooks/UseAuth";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
-import UseAdmin from "./../../hooks/UseAdmin";
-
+ import UseAdmin from '../../hooks/UseAdmin'
 const Navbar = () => {
   const { user } = UseAuth();
-  const { userInfo } = UseAdmin();
   const navigate = useNavigate();
-  console.log(user);
-  const role_info = userInfo[0]?.role;
-
-  console.log(role_info);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { userInfo } = UseAdmin();
+    const role_info = userInfo[0]?.role;
+  
+    console.log(role_info);
   const handleLogout = () => {
     firebaseSignOut(auth)
       .then(() => {
@@ -57,7 +55,7 @@ const Navbar = () => {
             Home
           </Link>
           {/* Admin  */}
-       
+
           <Link to="/trainers" className="hover:text-primary transition">
             All Trainers
           </Link>

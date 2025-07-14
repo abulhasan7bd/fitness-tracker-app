@@ -1,125 +1,104 @@
 import React, { useState } from "react";
-
-// Reusable Modal component
-const Modal = ({ children, onClose }) => {
-  return (
-    <>
-      {/* Overlay */}
-      <div
-        className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-        onClick={onClose} // close when clicking outside
-      />
-
-      {/* Modal content */}
-      <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
-        <div
-          className="bg-white rounded-lg p-6 max-w-md w-full pointer-events-auto shadow-lg"
-          onClick={(e) => e.stopPropagation()} // prevent close on modal content click
-        >
-          {children}
-          <button
-            onClick={onClose}
-            className="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-          >
-            Close
-          </button>
-        </div>
-      </div>
-    </>
-  );
-};
-
-// ReviewModal component
-const ReviewModal = ({ onClose }) => {
-  const [form, setForm] = useState({ rating: 0, comment: "" });
-
-  const handleStarClick = (star) => {
-    setForm((prev) => ({ ...prev, rating: star }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`Submitted review:\nRating: ${form.rating}\nComment: ${form.comment}`);
-    // TODO: Replace alert with API call to save review
-    onClose();
-  };
-
-  return (
-    <Modal onClose={onClose}>
-      <h3 className="text-lg font-semibold mb-2">Leave a Review</h3>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="flex space-x-1 text-3xl cursor-pointer">
-          {[1, 2, 3, 4, 5].map((star) => (
-            <span
-              key={star}
-              onClick={() => handleStarClick(star)}
-              className={form.rating >= star ? "text-yellow-400" : "text-gray-300"}
-            >
-              ★
-            </span>
-          ))}
-        </div>
-        <textarea
-          className="w-full border rounded p-2"
-          placeholder="Write your feedback here..."
-          value={form.comment}
-          onChange={(e) => setForm({ ...form, comment: e.target.value })}
-          rows={4}
-        />
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
-          disabled={form.rating === 0}
-        >
-          Submit Review
-        </button>
-      </form>
-    </Modal>
-  );
-};
-
-const dummyTrainer = {
-  name: "Hasan Trainer",
-  image: "https://via.placeholder.com/100",
-  classes: ["Yoga", "Cardio"],
-  slots: ["Mon 8AM", "Wed 6PM"],
-  about: "Experienced in multiple fitness domains.",
-};
+import UseAxios from "../../../hooks/UseAxios";
+import { useQuery } from "@tanstack/react-query";
+import ReviewModal from "./ReviewModal";
 
 const BookedTrainer = () => {
+  const axiosSecure = UseAxios();
   const [modalOpen, setModalOpen] = useState(false);
+  const [selectedTrainer, setSelectedTrainer] = useState(null);
+
+  const {
+    data: trainers = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["beatrainer"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/beatrainer");
+      return res.data;
+    },
+  });
+
+  if (isLoading)
+    return <p className="text-center mt-10">Loading trainers...</p>;
+  if (isError)
+    return (
+      <p className="text-center mt-10 text-red-600">
+        Error loading trainers: {error.message}
+      </p>
+    );
+
+  if (trainers.length === 0)
+    return <p className="text-center mt-10">No booked trainers found.</p>;
+
+  const openReviewModal = (trainer) => {
+    setSelectedTrainer(trainer);
+    setModalOpen(true);
+  };
 
   return (
-    <div className="max-w-3xl mx-auto p-4">
-      <h2 className="text-xl font-bold mb-4">Your Booked Trainer</h2>
+    <div className="max-w-3xl mx-auto p-4 space-y-8">
+      <h2 className="text-xl font-bold mb-6 text-center">
+        Your Booked Trainers
+      </h2>
 
-      <div className="border p-4 rounded space-y-2">
-        <img
-          src={dummyTrainer.image}
-          alt="Trainer"
-          className="w-24 h-24 rounded-full"
-        />
-        <p>
-          <strong>Name:</strong> {dummyTrainer.name}
-        </p>
-        <p>
-          <strong>About:</strong> {dummyTrainer.about}
-        </p>
-        <p>
-          <strong>Classes:</strong> {dummyTrainer.classes.join(", ")}
-        </p>
-        <p>
-          <strong>Available Slots:</strong> {dummyTrainer.slots.join(", ")}
-        </p>
-        <button
-          onClick={() => setModalOpen(true)}
-          className="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+      {trainers.map((trainer) => (
+        <div
+          key={trainer._id}
+          className="border p-6 rounded shadow-md grid grid-cols-1 md:grid-cols-2 gap-6 items-center"
         >
-          Leave a Review
-        </button>
-      </div>
+          {/* Left Column: Profile Image + Basic Info */}
+          <div className="flex flex-col items-center space-y-4">
+            <img
+              src={trainer.profileImage}
+              alt={trainer.fullName}
+              className="w-28 h-28 rounded-full object-cover"
+            />
+            <p>
+              <strong>Age:</strong> {trainer.age}
+            </p>
+            <p>
+              <strong>University:</strong> {trainer.university}
+            </p>
+            <p>
+              <strong>Passing Year:</strong> {trainer.passingYear}
+            </p>
+            <p>
+              <strong>Company:</strong> {trainer.company}
+            </p>
+          </div>
 
-      {modalOpen && <ReviewModal onClose={() => setModalOpen(false)} />}
+          {/* Right Column: Slots + Review Button */}
+          <div className="flex flex-col justify-between h-full">
+            <div>
+              <h3 className="font-semibold mb-2">Available Slots:</h3>
+              <p>
+                <strong>Days:</strong> {trainer.availableDays?.join(", ")}
+              </p>
+              <p>
+                <strong>Time:</strong> {trainer.availableTime}
+              </p>
+            </div>
+
+            <button
+              onClick={() => openReviewModal(trainer)}
+              className="mt-4 self-start px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+            >
+              Leave a Review
+            </button>
+          </div>
+        </div>
+      ))}
+
+      {/* Review Modal */}
+      {modalOpen && (
+        <ReviewModal
+          onClose={() => setModalOpen(false)}
+          trainer={selectedTrainer}
+        />
+      )}
     </div>
   );
 };

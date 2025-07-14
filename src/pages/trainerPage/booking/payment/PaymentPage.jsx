@@ -1,85 +1,52 @@
+
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import CheckoutForm from "./CheckoutForm";
+import { useSearchParams } from "react-router-dom";
 import UseAuth from "../../../../hooks/UseAuth";
+import CheckoutForm from "./CheckoutForm";
 
 const PaymentPage = () => {
-  const location = useLocation();
-  const query = new URLSearchParams(location.search);
   const { user } = UseAuth();
-  const userEmail = user?.email;
-  const trainer = query.get("trainer") || "John Doe";
-  const slot = query.get("slot") || "Monday 10:00 AM";
-  const packageName = query.get("plan") || "basic";
+  const userEmail = user?.email || "";
+  const [searchParams] = useSearchParams();
 
-  const packageDetails = {
-    basic: {
-      name: "Basic Membership",
-      price: 10,
-      benefits: [
-        "Access to gym facilities during regular hours",
-        "Use of cardio and strength training equipment",
-      ],
-    },
-    standard: {
-      name: "Standard Membership",
-      price: 50,
-      benefits: [
-        "All benefits of Basic",
-        "Access to group fitness classes",
-        "Locker rooms and showers",
-      ],
-    },
-    premium: {
-      name: "Premium Membership",
-      price: 100,
-      benefits: [
-        "All benefits of Standard",
-        "Personal training sessions",
-        "Sauna or steam room access",
-        "Discounts on massages/nutrition counseling",
-      ],
-    },
+  const trainer = searchParams.get("trainer");
+  const slot = searchParams.get("slot");
+  const plan = searchParams.get("plan");
+
+  const [formData, setFormData] = useState({
+    name: user?.displayName || "",
+    email: userEmail,
+  });
+
+  const planPrices = {
+  basic: 10,
+  standard: 50,
+  premium: 100,
+};
+
+const price = planPrices[plan] || 0;
+  const handleInputChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
-
-  const selectedPackage = packageDetails[packageName];
-
-  const [formData, setFormData] = useState({ name: "", email: "" });
-
-  const handleInputChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow rounded-2xl">
       <h2 className="text-3xl font-bold mb-6">Trainer Payment Page</h2>
 
+      {/* Show trainer and slot info */}
       <div className="mb-6 space-y-2">
-        <p>
-          <strong>Trainer:</strong> {trainer}
-        </p>
-        <p>
-          <strong>Slot:</strong> {slot}
-        </p>
-        <p>
-          <strong>Package:</strong> {selectedPackage.name}
-        </p>
-        <p>
-          <strong>Price:</strong> ${selectedPackage.price}
-        </p>
+        <p><strong>Trainer:</strong> {trainer}</p>
+        <p><strong>Slot:</strong> {slot}</p>
+        <p><strong>Selected Plan:</strong> {plan}</p>
       </div>
 
-      <div className="mb-6">
-        <h3 className="text-xl font-semibold mb-2">Package Includes:</h3>
-        <ul className="list-disc list-inside text-gray-700">
-          {selectedPackage.benefits.map((b, i) => (
-            <li key={i}>{b}</li>
-          ))}
-        </ul>
-      </div>
-
-      <form className="space-y-4">
+      {/* Input form */}
+      <form className="space-y-4 mb-8">
         <div>
-          <label className="block text-sm mb-1">Your Name</label>
+          <label className="block text-sm font-medium mb-1">Your Name</label>
           <input
             type="text"
             name="name"
@@ -90,7 +57,7 @@ const PaymentPage = () => {
           />
         </div>
         <div>
-          <label className="block text-sm mb-1">Email</label>
+          <label className="block text-sm font-medium mb-1">Email</label>
           <input
             type="email"
             name="email"
@@ -101,16 +68,17 @@ const PaymentPage = () => {
           />
         </div>
       </form>
-      {/* Pass data to checkout */}
+
+      {/* Checkout Form */}
       <CheckoutForm
-        price={selectedPackage.price}
+        price={price}
         bookingData={{
           payerName: formData.name,
           payerEmail: formData.email,
-          userEmail: userEmail,
+          userEmail,
           trainer,
           slot,
-          packageName: selectedPackage.name,
+          plan,
         }}
       />
     </div>

@@ -7,7 +7,6 @@ const MyBooking = () => {
   const { user } = UseAuth();
   const email = user?.email;
   const axiosSecure = UseAxios();
-console.log(email)
   const {
     data: bookings = [],
     isLoading,
@@ -20,6 +19,7 @@ console.log(email)
     },
   });
 
+  console.log(bookings)
   if (isLoading) return <p className="text-center mt-10">Loading...</p>;
   if (isError)
     return (

@@ -2,7 +2,7 @@ import React from "react";
 import { ThumbsUp, ThumbsDown } from "lucide-react";
 
 const PostCard = ({ post, onVote }) => {
-    console.log(post,onVote)
+  console.log(post)
   return (
     <div className="bg-white shadow-md rounded-xl p-4 mb-4">
       <h2 className="text-xl font-semibold mb-2">{post.title}</h2>

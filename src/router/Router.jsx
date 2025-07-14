@@ -25,6 +25,11 @@ import ForumPosts from "../pages/forum/ForumComponents/ForumPosts";
 import ManageSlots from "../pages/dashboard/trainer/ManageSlots";
 import DashBoardHome from "../layouts/DashBoardHome";
 import ApplyedTrainer from "../pages/dashboard/applyed/ApplyedTrainer";
+import NewsLetter from "../pages/newsletter/NewsLetter";
+import AllNewsLetter from "../pages/dashboard/newsletterall/AllnewsLetter";
+import TrainerDeletebyRole from "../pages/dashboard/deleteTrainer/TrainerDeletebyRole";
+import Balance from "../pages/dashboard/balance/Balance";
+import NewForum from "../pages/dashboard/newForum/NewForum";
 
 const router = createBrowserRouter([
   {
@@ -38,15 +43,25 @@ const router = createBrowserRouter([
       { path: "/contact", element: <h3>Contact</h3> },
       {
         path: "/trainers",
+        element: <AlltrainerPage />,
+      },
+      { path: "/trainers/:id", element: <TrainerDetail /> },
+      {
+        path: "/booking/:id",
         element: (
           <PrivateRoute>
-            <AlltrainerPage />
+            <TrainerBooking />
           </PrivateRoute>
         ),
       },
-      { path: "/trainers/:id", element: <TrainerDetail /> },
-      { path: "/booking/:id", element: <TrainerBooking /> },
-      { path: "/payment", element: <Paymentpage /> },
+      {
+        path: "/payment",
+        element: (
+          <PrivateRoute>
+            <Paymentpage />
+          </PrivateRoute>
+        ),
+      },
       { path: "/classes", element: <Classes /> },
       { path: "/forum", element: <ForumPosts /> },
       // { path: "/forum", element: <ForumPage /> },
@@ -54,23 +69,38 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashBoardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashBoardLayout />
+      </PrivateRoute>
+    ),
     children: [
-      {index:true,element:<DashBoardHome/>},
+      { index: true, element: <DashBoardHome /> },
       { path: "profile", element: <Profile /> },
       { path: "my-bookings", element: <MyBooking /> },
       {
         path: "be-a-trainer",
         element: <Be_a_Trainer />,
       },
-      { path: "be-a-trainer/apply", element: <BeATrainerPage /> },
+      {
+        path: "be-a-trainer/apply",
+        element: (
+          <PrivateRoute>
+            <BeATrainerPage />
+          </PrivateRoute>
+        ),
+      },
       { path: "add-a-new-class", element: <Add_a_New_class /> },
+      { path: "allNewsSubscribers", element: <AllNewsLetter /> },
+      { path: "deleateAtrainer", element: <TrainerDeletebyRole /> },
       { path: "add-new-slot", element: <AddNewSlot /> },
-      {path:"manage-slot" ,element:<ManageSlots/>},
+      { path: "manage-slot", element: <ManageSlots /> },
       { path: "activity-log", element: <ActivityLog /> },
       { path: "profile", element: <ProfilePage /> },
       { path: "booked-trainer", element: <BookedTrainer /> },
       { path: "appliedTrainer", element: <ApplyedTrainer /> },
+      { path: "new-forum", element: <NewForum /> },
+      { path: "balance", element: <Balance /> },
     ],
   },
   {

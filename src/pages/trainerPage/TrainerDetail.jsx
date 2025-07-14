@@ -4,21 +4,21 @@ import UseAxios from "../../hooks/UseAxios";
 import { useQuery } from "@tanstack/react-query";
 
 const DataDetail = () => {
- 
   const axiosInstance = UseAxios();
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const { data, isLoading, error } = useQuery({
     queryKey: ["data", id],
     queryFn: async () => {
       const res = await axiosInstance.get(`/beatriner/${id}`);
       return res.data;
     },
-    enabled: !!id, 
+    enabled: !!id,
   });
 
- 
-
+  const handleSlotClick = (slot) => {
+    navigate(`/booking/${id}`, { state: { data, slot } });
+  };
   if (isLoading) return <h2 className="text-center mt-10">Loading.....</h2>;
   if (error)
     return (
@@ -78,7 +78,7 @@ const DataDetail = () => {
                 <span
                   key={index}
                   className="bg-[#301e4e] text-white px-4 py-2 rounded-2xl cursor-default"
-                  // onClick={() => handleSlotClick(slot)} // Uncomment if needed
+                  onClick={() => handleSlotClick(slot)}
                 >
                   {slot}
                 </span>

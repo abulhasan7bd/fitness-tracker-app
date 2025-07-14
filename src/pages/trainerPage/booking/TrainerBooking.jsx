@@ -1,36 +1,48 @@
 import React, { useState } from "react";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const TrainerBooking = () => {
-  const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  const queryParams = new URLSearchParams(location.search);
-  const slot = queryParams.get("slot");
 
-  // Dummy trainer data (would usually be fetched by ID)
-  const trainer = {
-    id,
-    name: "John Doe",
-  };
+  // Receive trainer and slot from location.state
+  const trainer = location.state?.data;
+  const slot = location.state?.slot;
 
+  // Plan state
   const [selectedPlan, setSelectedPlan] = useState("basic");
 
   const handleJoinNow = () => {
+    if (!selectedPlan) {
+      alert("Please select a membership plan.");
+      return;
+    }
+
     navigate(
-      `/payment?trainer=${trainer.id}&slot=${encodeURIComponent(
-        slot
-      )}&plan=${selectedPlan}`
+      `/payment?trainer=${encodeURIComponent(
+        trainer.fullName
+      )}&slot=${encodeURIComponent(slot)}&plan=${selectedPlan}`
     );
   };
 
+  if (!trainer || !slot) {
+    return (
+      <div className="max-w-4xl mx-auto p-6">
+        <h2 className="text-2xl font-bold text-red-500">
+          Invalid booking data
+        </h2>
+      </div>
+    );
+  }
+
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-xl">
       <h2 className="text-3xl font-bold mb-4">Trainer Booking</h2>
 
-      <div className="mb-6">
+      {/* Trainer Info */}
+      <div className="mb-6 space-y-2">
         <p className="text-lg">
-          <strong>Trainer:</strong> {trainer.name}
+          <strong>Trainer:</strong> {trainer.fullName}
         </p>
         <p className="text-lg">
           <strong>Selected Slot:</strong> {slot}
@@ -39,9 +51,14 @@ const TrainerBooking = () => {
 
       <h3 className="text-2xl font-semibold mb-4">Choose Your Package</h3>
 
+      {/* Membership Options */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Basic Plan */}
-        <label className="border rounded-2xl p-4 cursor-pointer shadow-md hover:shadow-lg transition">
+        <label
+          className={`border rounded-2xl p-4 cursor-pointer shadow-md hover:shadow-lg transition ${
+            selectedPlan === "basic" && "ring-2 ring-blue-500"
+          }`}
+        >
           <input
             type="radio"
             name="membership"
@@ -59,7 +76,11 @@ const TrainerBooking = () => {
         </label>
 
         {/* Standard Plan */}
-        <label className="border rounded-2xl p-4 cursor-pointer shadow-md hover:shadow-lg transition">
+        <label
+          className={`border rounded-2xl p-4 cursor-pointer shadow-md hover:shadow-lg transition ${
+            selectedPlan === "standard" && "ring-2 ring-blue-500"
+          }`}
+        >
           <input
             type="radio"
             name="membership"
@@ -71,14 +92,18 @@ const TrainerBooking = () => {
           <h4 className="text-xl font-semibold">Standard Membership</h4>
           <ul className="list-disc list-inside text-sm text-gray-700 mt-2">
             <li>All Basic benefits</li>
-            <li>Group fitness classes (yoga, spinning, Zumba)</li>
-            <li>Locker room and showers access</li>
+            <li>Group fitness classes</li>
+            <li>Locker room and showers</li>
           </ul>
           <p className="font-bold mt-2">Price: $50</p>
         </label>
 
         {/* Premium Plan */}
-        <label className="border rounded-2xl p-4 cursor-pointer shadow-md hover:shadow-lg transition">
+        <label
+          className={`border rounded-2xl p-4 cursor-pointer shadow-md hover:shadow-lg transition ${
+            selectedPlan === "premium" && "ring-2 ring-blue-500"
+          }`}
+        >
           <input
             type="radio"
             name="membership"
@@ -91,13 +116,14 @@ const TrainerBooking = () => {
           <ul className="list-disc list-inside text-sm text-gray-700 mt-2">
             <li>All Standard benefits</li>
             <li>Personal training sessions</li>
-            <li>Sauna, steam room access</li>
-            <li>Discounts on massages/nutrition</li>
+            <li>Sauna & steam room</li>
+            <li>Discounts on massage & nutrition</li>
           </ul>
           <p className="font-bold mt-2">Price: $100</p>
         </label>
       </div>
 
+      {/* Join Now Button */}
       <div className="mt-6">
         <button
           onClick={handleJoinNow}

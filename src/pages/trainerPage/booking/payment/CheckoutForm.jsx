@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import UseAxios from "../../../../hooks/UseAxios";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useEffect } from "react";
-import  Swal  from "sweetalert2";
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ price, bookingData }) => {
+  console.log(price, bookingData);
   const navigate = useNavigate();
-  console.log(bookingData);
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
@@ -48,7 +48,7 @@ const CheckoutForm = ({ price, bookingData }) => {
       return;
     }
 
-    console.log(paymentIntent);
+    console.log("paymentIntert", paymentIntent);
     if (paymentIntent.status === "succeeded") {
       setSuccess("Payment successful");
 

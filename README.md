@@ -1,165 +1,64 @@
-# 🏋️ Fitness Tracker Web Application
+# 🏃‍♂️ Fitness Tracker Application
 
-A modern, responsive fitness tracking platform where users can log workouts, apply as trainers, and manage training schedules. This full-stack web app supports user roles (admin, trainer, member), personalized dashboards, and secure authentication.
-
----
-
-## 🌐 Live Website
-
-🔗 [https://your-fitness-tracker.vercel.app](https://your-fitness-tracker.vercel.app)
+A responsive web-based fitness management platform designed to help users track their workouts, manage routines, and connect with trainers. Built using modern web technologies with role-based access for users and admins.
 
 ---
 
-## 👤 Admin Demo Credentials
+## 🔗 Live Site
 
-- **Username:** `admin@fitness.com`
-- **Password:** `admin123`
-
-> You can change these dummy credentials later.
+👉 [Visit the Live Application](https://assignmet-12-5e8a8.web.app)
 
 ---
 
-## 🚀 Project Features (🔟 Bullet Points)
+## 📁 Repositories
 
-- 🔐 Firebase authentication with email/password login
-- 🧑‍💼 Role-based dashboards: Admin, Trainer, Member
-- 📝 Users can apply to become a trainer (pending approval)
-- 📅 Trainers can set availability (days and time slots)
-- 📋 Members can book training sessions with trainers
-- 📈 Workout tracking with sets, reps, weights, and notes
-- 💬 Members can leave reviews for trainers
-- 🛠 Admin dashboard to manage users and approve trainers
-- 📱 Fully responsive UI using Tailwind CSS & DaisyUI
-- 🗄️ MongoDB & Express backend with secure APIs (JWT)
+- **Client Side Repo**: [GitHub - Client](https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-abulhasan7bd)
+- **Server Side Repo**: [GitHub - Server](https://github.com/Programming-Hero-Web-Course4/b11a12-server-side-abulhasan7bd)
 
 ---
 
-## 🧪 Dummy Data (for development)
+## 🛠️ Admin Credentials
 
-### 🧑 Dummy Trainer
-```json
-{
-  "name": "Hasan Trainer",
-  "email": "trainer@fitness.com",
-  "skills": ["Cardio", "Weightlifting"],
-  "availableDays": ["Sun", "Tue", "Thu"],
-  "timeSlots": ["10AM-12PM", "4PM-6PM"],
-  "status": "approved",
-  "image": "https://via.placeholder.com/150"
-}
+- 👤 **Name**: Md. Abul Hasan  
+- 📧 **Email**: abulhasan7bd@gmail.com  
+- 🔐 **Password**: aA1234
 
-## Member 
-{
-  "name": "Fatema Member",
-  "email": "member@fitness.com",
-  "role": "member",
-  "image": "https://via.placeholder.com/150"
-}
-
-
-{
-  "userId": "member_user_id",
-  "date": "2025-07-11",
-  "exercises": [
-    {
-      "name": "Squats",
-      "sets": 3,
-      "reps": 10,
-      "weight": 80
-    },
-    {
-      "name": "Bench Press",
-      "sets": 3,
-      "reps": 8,
-      "weight": 60
-    }
-  ],
-  "notes": "Felt strong today!"
-}
-git clone https://github.com/your-username/fitness-tracker.git
-cd fitness-tracker
-npm install
-npm run dev
-
-# 🏋️ Fitness Tracker Web Application
-
-A modern, responsive fitness tracking platform where users can log workouts, apply as trainers, and manage training schedules. This full-stack web app supports user roles (admin, trainer, member), personalized dashboards, and secure authentication.
+> Use these credentials to log in as an admin and explore all available features.
 
 ---
 
-## 🌐 Live Website
+## 🌟 Features
 
-🔗 [https://your-fitness-tracker.vercel.app](https://your-fitness-tracker.vercel.app)
-
----
-
-## 👤 Admin Demo Credentials
-
-- **Username:** `admin@fitness.com`
-- **Password:** `admin123`
-
-> You can change these dummy credentials later.
-
----
-
-## 🚀 Project Features (🔟 Bullet Points)
-
-- 🔐 Firebase authentication with email/password login
-- 🧑‍💼 Role-based dashboards: Admin, Trainer, Member
-- 📝 Users can apply to become a trainer (pending approval)
-- 📅 Trainers can set availability (days and time slots)
-- 📋 Members can book training sessions with trainers
-- 📈 Workout tracking with sets, reps, weights, and notes
-- 💬 Members can leave reviews for trainers
-- 🛠 Admin dashboard to manage users and approve trainers
-- 📱 Fully responsive UI using Tailwind CSS & DaisyUI
-- 🗄️ MongoDB & Express backend with secure APIs (JWT)
+- ✅ **Responsive Design** – Fully responsive for mobile, tablet, and desktop devices.
+- 🔐 **Firebase Authentication** – Secure login/signup using Firebase auth.
+- 🧑‍💼 **Role-Based Dashboard** – Separate access for Admins, Trainers, and Members.
+- 🔁 **React Router DOM** – Smooth client-side navigation with protected routes.
+- 📅 **React Select Integration** – Stylish and user-friendly dropdowns for selecting days, skills, etc.
+- 🔍 **Dynamic Search & Filtering** – Easy filtering of classes or trainers.
+- 📈 **Progress & Tracker Components** – Track fitness goals and class progress.
+- 📝 **Feedback & Reviews** – Users can leave reviews for trainers.
+- 🗄️ **MongoDB Database** – Stores classes, users, trainers, feedbacks securely.
+- 🌐 **Express + Node.js Server** – Robust server-side API for managing app data.
 
 ---
 
-## 🧪 Dummy Data (for development)
+## 📦 Tech Stack
 
-### 🧑 Dummy Trainer
-```json
-{
-  "name": "Hasan Trainer",
-  "email": "trainer@fitness.com",
-  "skills": ["Cardio", "Weightlifting"],
-  "availableDays": ["Sun", "Tue", "Thu"],
-  "timeSlots": ["10AM-12PM", "4PM-6PM"],
-  "status": "approved",
-  "image": "https://via.placeholder.com/150"
-}
+| Frontend               | Backend              |
+|------------------------|----------------------|
+| React.js               | Node.js              |
+| React Router DOM       | Express.js           |
+| React Select           | MongoDB (via Mongoose) |
+| Firebase Auth          | JWT Token Auth       |
+| Tailwind CSS + DaisyUI |                     |
 
-## Member 
-{
-  "name": "Fatema Member",
-  "email": "member@fitness.com",
-  "role": "member",
-  "image": "https://via.placeholder.com/150"
-}
+---
 
+## 🚀 Getting Started (For Developers)
 
-{
-  "userId": "member_user_id",
-  "date": "2025-07-11",
-  "exercises": [
-    {
-      "name": "Squats",
-      "sets": 3,
-      "reps": 10,
-      "weight": 80
-    },
-    {
-      "name": "Bench Press",
-      "sets": 3,
-      "reps": 8,
-      "weight": 60
-    }
-  ],
-  "notes": "Felt strong today!"
-}
-git clone https://github.com/your-username/fitness-tracker.git
-cd fitness-tracker
-npm install
-npm run dev
+1. Clone both repos (client & server)
+2. Set up `.env` file for server with your MongoDB & JWT config
+3. Run server:
+   ```bash
+   npm install
+   npm run start

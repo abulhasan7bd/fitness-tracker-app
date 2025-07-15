@@ -34,7 +34,8 @@ const Signup = () => {
         name: data.name,
         email: data.email,
         photoURL: data.photoURL,
-        role: "member",
+        //  Admin Trainer Member (default)
+        role: "Admin",
       };
 
       // server save user information

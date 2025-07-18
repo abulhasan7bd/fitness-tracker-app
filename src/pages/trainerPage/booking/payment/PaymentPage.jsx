@@ -1,6 +1,5 @@
-
 import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import UseAuth from "../../../../hooks/UseAuth";
 import CheckoutForm from "./CheckoutForm";
 
@@ -8,7 +7,8 @@ const PaymentPage = () => {
   const { user } = UseAuth();
   const userEmail = user?.email || "";
   const [searchParams] = useSearchParams();
-
+  const location = useLocation();
+  const bookingdata = location.state;
   const trainer = searchParams.get("trainer");
   const slot = searchParams.get("slot");
   const plan = searchParams.get("plan");
@@ -19,12 +19,12 @@ const PaymentPage = () => {
   });
 
   const planPrices = {
-  basic: 10,
-  standard: 50,
-  premium: 100,
-};
+    basic: 10,
+    standard: 50,
+    premium: 100,
+  };
 
-const price = planPrices[plan] || 0;
+  const price = planPrices[plan] || 0;
   const handleInputChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -38,9 +38,15 @@ const price = planPrices[plan] || 0;
 
       {/* Show trainer and slot info */}
       <div className="mb-6 space-y-2">
-        <p><strong>Trainer:</strong> {trainer}</p>
-        <p><strong>Slot:</strong> {slot}</p>
-        <p><strong>Selected Plan:</strong> {plan}</p>
+        <p>
+          <strong>Trainer:</strong> {trainer}
+        </p>
+        <p>
+          <strong>Slot:</strong> {slot}
+        </p>
+        <p>
+          <strong>Selected Plan:</strong> {plan}
+        </p>
       </div>
 
       {/* Input form */}
@@ -71,6 +77,7 @@ const price = planPrices[plan] || 0;
 
       {/* Checkout Form */}
       <CheckoutForm
+        bookingdata={bookingdata}
         price={price}
         bookingData={{
           payerName: formData.name,

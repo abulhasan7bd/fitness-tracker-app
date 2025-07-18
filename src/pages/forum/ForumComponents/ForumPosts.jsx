@@ -2,10 +2,12 @@ import React from "react";
 
 import PostCard from "./PostCard";
 import UseAxios from "../../../hooks/UseAxios";
-import {   useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import UseAuth from "../../../hooks/UseAuth";
+import { Helmet } from "react-helmet";
 
 const ForumPosts = () => {
+  console.log("render form post");
   const useAxios = UseAxios();
   const { user } = UseAuth();
   const queryClient = useQueryClient();
@@ -21,22 +23,23 @@ const ForumPosts = () => {
     },
   });
 
-  console.log(forums)
   // provide your vote
   const onVote = async (id, type) => {
-    console.log("click")
+    console.log("click");
     try {
       const res = await useAxios.patch(`/forums/${id}/vote`, {
         email: user.email,
+        
         type,
       });
       console.log(res);
-      // Optionally refetch data or update local state
       queryClient.invalidateQueries(["forums"]);
     } catch (error) {
       console.error("Vote error:", error);
     }
   };
+
+  console.log(forums)
   if (isLoading) {
     return <h2>Loading....</h2>;
   }
@@ -44,13 +47,23 @@ const ForumPosts = () => {
     return <p className="text-red-300">{error.message}</p>;
   }
   return (
-    <div className="max-w-3xl mx-auto py-6 px-4">
-      <h1 className="text-2xl font-bold mb-4">📖 Forum Posts</h1>
+    <>
+      <Helmet>
+        <title>FitTrack | ForumsPage</title>
+      </Helmet>
+      <div className="max-w-3xl mx-auto py-6 px-4">
+        <h1 className="text-2xl font-bold mb-4">📖 Forum Posts</h1>
 
-      {forums.map((post) => (
-        <PostCard key={post._id} post={post} forums={forums} onVote={onVote} />
-      ))}
-    </div>
+        {forums.map((post) => (
+          <PostCard
+            key={post._id}
+            post={post}
+            forums={forums}
+            onVote={onVote}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 

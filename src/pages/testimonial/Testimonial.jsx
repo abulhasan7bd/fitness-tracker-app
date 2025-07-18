@@ -1,43 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { FaArrowLeft, FaArrowRight, FaStar } from "react-icons/fa";
 
 const Testimonial = () => {
-  const dummyReviews = [
-    {
-      id: 1,
-      name: "Alice Johnson",
-      text: "This fitness tracker changed my life! Easy to use and super motivating.",
-    },
-    {
-      id: 2,
-      name: "Mark Wilson",
-      text: "I love how I can track my workouts and see real progress every week.",
-    },
-    {
-      id: 3,
-      name: "Sara Lee",
-      text: "Great app with amazing features. The goals section keeps me on track!",
-    },
-    {
-      id: 4,
-      name: "John Doe",
-      text: "The nutrition tracker helped me maintain a healthier diet easily.",
-    },
-    {
-      id: 5,
-      name: "Emily Clark",
-      text: "Excellent design and user-friendly interface. Highly recommend!",
-    },
-  ];
-
+  const [reviews, setReviews] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
-  const total = dummyReviews.length;
+  const [reviewsPerPage, setReviewsPerPage] = useState(3); // Default 3 for large screens
 
-  // Show 3 reviews at a time
-  const visibleReviews = [
-    dummyReviews[startIndex % total],
-    dummyReviews[(startIndex + 1) % total],
-    dummyReviews[(startIndex + 2) % total],
-  ];
+  useEffect(() => {
+    // Fetch review data
+    axios
+      .get("http://localhost:5000/reviews")
+      .then((res) => setReviews(res.data))
+      .catch((err) => console.error("Error fetching reviews:", err));
+  }, []);
+
+  useEffect(() => {
+    // Set reviewsPerPage based on screen size
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 640) {
+        setReviewsPerPage(1); // Mobile
+      } else if (width < 1024) {
+        setReviewsPerPage(2); // Tablet
+      } else {
+        setReviewsPerPage(3); // Desktop
+      }
+    };
+
+    handleResize(); // Initial
+    window.addEventListener("resize", handleResize); // Update on resize
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const total = reviews.length;
+
+  const getVisibleReviews = () => {
+    const visible = [];
+    for (let i = 0; i < reviewsPerPage; i++) {
+      visible.push(reviews[(startIndex + i) % total]);
+    }
+    return visible;
+  };
+
+  const visibleReviews = getVisibleReviews().filter(Boolean);
 
   const handlePrev = () => {
     setStartIndex((prev) => (prev - 1 + total) % total);
@@ -48,31 +54,46 @@ const Testimonial = () => {
   };
 
   return (
-    <section className="max-w-6xl mx-auto px-4 py-12 bg-gray-50 rounded-xl shadow-lg">
-      <h2 className="text-3xl font-bold mb-8 text-center">
-        What Our Members Say
+    <section className="max-w-6xl mx-auto px-4 py-12 bg-gray-100 rounded-xl shadow-lg my-8">
+      <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center text-blue-700">
+        What Our Clients Say
       </h2>
 
       <div className="relative">
         {/* Left Arrow */}
         <button
           onClick={handlePrev}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white rounded-full p-3 hover:bg-blue-700 transition z-10"
+          className="absolute left-2 top-1/2 -translate-y-1/2 bg-blue-600 text-white rounded-full p-2 md:p-3 hover:bg-blue-700 transition z-10"
           aria-label="Previous"
         >
-          &#8592;
+          <FaArrowLeft />
         </button>
 
-        {/* Review Cards Container */}
-        <div className="flex space-x-6 overflow-hidden">
-          {visibleReviews.map((review) => (
+        {/* Review Cards */}
+        <div
+          className={`grid gap-6 px-6 ${
+            reviewsPerPage === 1
+              ? "grid-cols-1"
+              : reviewsPerPage === 2
+              ? "grid-cols-2"
+              : "grid-cols-3"
+          }`}
+        >
+          {visibleReviews.map((review, idx) => (
             <div
-              key={review.id}
-              className="flex-1 bg-white rounded-xl p-6 shadow-md"
-              style={{ minWidth: "30%" }}
+              key={idx}
+              className="bg-white rounded-xl p-6 shadow-md border border-blue-100"
             >
-              <p className="text-gray-700 mb-4">"{review.text}"</p>
-              <p className="font-semibold text-blue-600">- {review.name}</p>
+              <div className="flex items-center mb-3 gap-1 text-yellow-500">
+                {[...Array(review.rating || 5)].map((_, i) => (
+                  <FaStar key={i} />
+                ))}
+              </div>
+              <p className="text-gray-700 italic mb-4">"{review.reviewText}"</p>
+              <p className="font-semibold text-blue-600">
+                - {review.payerName || "Anonymous"}
+              </p>
+              <p className="text-sm text-gray-500">{review.trainer}</p>
             </div>
           ))}
         </div>
@@ -80,10 +101,10 @@ const Testimonial = () => {
         {/* Right Arrow */}
         <button
           onClick={handleNext}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white rounded-full p-3 hover:bg-blue-700 transition z-10"
+          className="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 text-white rounded-full p-2 md:p-3 hover:bg-blue-700 transition z-10"
           aria-label="Next"
         >
-          &#8594;
+          <FaArrowRight />
         </button>
       </div>
     </section>

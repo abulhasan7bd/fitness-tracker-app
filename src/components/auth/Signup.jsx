@@ -5,6 +5,7 @@ import { auth } from "../../../firebase.init";
 import Swal from "sweetalert2";
 import UseAuth from "../../hooks/UseAuth";
 import UseAxios from "../../hooks/UseAxios";
+import { Helmet } from "react-helmet";
 
 const Signup = () => {
   const { googleRegister, accountCreate, setLogin } = UseAuth();
@@ -34,8 +35,8 @@ const Signup = () => {
         name: data.name,
         email: data.email,
         photoURL: data.photoURL,
-        //  Admin Trainer Member (default)
-        role: "Admin",
+        //  admin trainer member (default)
+        role: "member",
       };
 
       // server save user information
@@ -89,82 +90,87 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen px-4">
-      <form onSubmit={handleSubmit} className="w-full max-w-2xl">
-        <fieldset className="bg-base-200 border border-base-300 rounded-box p-6">
-          <p className=" text-center text-[2rem] font-semibold">Sign In</p>
+    <>
+      <Helmet>
+        <title>FitTrack | Signup</title>
+      </Helmet>
+      <div className="flex justify-center items-center min-h-screen px-4">
+        <form onSubmit={handleSubmit} className="w-full max-w-2xl">
+          <fieldset className="bg-base-200 border border-base-300 rounded-box p-6">
+            <p className=" text-center text-[2rem] font-semibold">Sign In</p>
 
-          {/* Two column layout on md+, single column on mobile */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="label">Name</label>
-              <input
-                type="text"
-                name="name"
-                className="input input-bordered w-full"
-                placeholder="Name"
-                required
-              />
+            {/* Two column layout on md+, single column on mobile */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="label">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  className="input input-bordered w-full"
+                  placeholder="Name"
+                  required
+                />
+              </div>
+              <div>
+                <label className="label">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  className="input input-bordered w-full"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+              <div>
+                <label className="label">Photo URL</label>
+                <input
+                  type="text"
+                  name="photoURL"
+                  className="input input-bordered w-full"
+                  placeholder="Photo URL"
+                />
+              </div>
+              <div>
+                <label className="label">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  className="input input-bordered w-full"
+                  placeholder="Password"
+                  required
+                  pattern="(?=.*[a-z])(?=.*[A-Z]).+"
+                  title="Password must contain at least one uppercase and one lowercase letter"
+                />
+              </div>
             </div>
-            <div>
-              <label className="label">Email</label>
-              <input
-                type="email"
-                name="email"
-                className="input input-bordered w-full"
-                placeholder="Email"
-                required
-              />
+
+            {/* Buttons */}
+            <div className="mt-6">
+              <button type="submit" className="btn btn-neutral w-full mb-4">
+                Register
+              </button>
+
+              <p className="text-center mb-2">Or</p>
+
+              <button
+                type="button"
+                onClick={handleGoogleLogin}
+                className="btn btn-outline w-full mb-4"
+              >
+                Continue with Google
+              </button>
+
+              <p className="text-center">
+                Already have an account?{" "}
+                <Link to="/login" className="text-blue-600 hover:underline">
+                  Login
+                </Link>
+              </p>
             </div>
-            <div>
-              <label className="label">Photo URL</label>
-              <input
-                type="text"
-                name="photoURL"
-                className="input input-bordered w-full"
-                placeholder="Photo URL"
-              />
-            </div>
-            <div>
-              <label className="label">Password</label>
-              <input
-                type="password"
-                name="password"
-                className="input input-bordered w-full"
-                placeholder="Password"
-                required
-                pattern="(?=.*[a-z])(?=.*[A-Z]).+"
-                title="Password must contain at least one uppercase and one lowercase letter"
-              />
-            </div>
-          </div>
-
-          {/* Buttons */}
-          <div className="mt-6">
-            <button type="submit" className="btn btn-neutral w-full mb-4">
-              Register
-            </button>
-
-            <p className="text-center mb-2">Or</p>
-
-            <button
-              type="button"
-              onClick={handleGoogleLogin}
-              className="btn btn-outline w-full mb-4"
-            >
-              Continue with Google
-            </button>
-
-            <p className="text-center">
-              Already have an account?{" "}
-              <Link to="/login" className="text-blue-600 hover:underline">
-                Login
-              </Link>
-            </p>
-          </div>
-        </fieldset>
-      </form>
-    </div>
+          </fieldset>
+        </form>
+      </div>
+    </>
   );
 };
 

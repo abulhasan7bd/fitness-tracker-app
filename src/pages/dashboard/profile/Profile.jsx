@@ -1,75 +1,62 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import UseAuth from "../../../hooks/UseAuth";
+import { useQuery } from "@tanstack/react-query";
+import UseAxios from "../../../hooks/UseAxios";
 
 const Profile = () => {
-  // Dummy initial user data, replace with real user data fetching
-  const [profile, setProfile] = useState({
-    name: "John Doe",
-    photo: "https://via.placeholder.com/150",
-    email: "johndoe@example.com",
-    lastLogin: "2025-07-09 15:30:00",
+  const { user } = UseAuth();
+  const useAxios = UseAxios();
+  const email = user?.email;
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["userProfile", email],
+    queryFn: async () => {
+      const res = await useAxios.get(`/user?email=${email}`);
+      return res.data;
+    },
+    enabled: !!email,
   });
 
-  // Controlled inputs
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProfile((prev) => ({ ...prev, [name]: value }));
-  };
+  if (isLoading) return <p className="text-center">Loading profile...</p>;
+  if (isError) return <p className="text-center text-red-600">Error loading profile</p>;
 
-  const handleSave = () => {
-    alert(`Profile saved!\nName: ${profile.name}\nPhoto: ${profile.photo}`);
-    // TODO: Integrate API or Firebase update here
-  };
-
+  const { name, email: userEmail, photoURL, createdAt, role } = data[0];
+ 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded shadow">
-      <h2 className="text-2xl font-semibold mb-4">My Profile</h2>
+  <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+  <div className="w-full max-w-md bg-white p-6 rounded-2xl shadow-lg text-center">
+    <h2 className="text-3xl font-bold mb-6">My Profile</h2>
 
-      <label className="block mb-2 font-medium">Full Name</label>
-      <input
-        type="text"
-        name="name"
-        value={profile.name}
-        onChange={handleChange}
-        className="w-full border px-3 py-2 rounded mb-4"
+    <div className="flex justify-center mb-4">
+      <img
+        src={photoURL}
+        alt="Profile"
+        className="w-32 h-32 rounded-full object-cover border-4 border-blue-500"
       />
-
-      <label className="block mb-2 font-medium">Profile Picture URL</label>
-      <input
-        type="text"
-        name="photo"
-        value={profile.photo}
-        onChange={handleChange}
-        className="w-full border px-3 py-2 rounded mb-4"
-      />
-
-      {profile.photo && (
-        <img
-          src={profile.photo}
-          alt="Profile"
-          className="w-32 h-32 rounded-full mb-4 object-cover"
-        />
-      )}
-
-      <label className="block mb-2 font-medium">Email (read-only)</label>
-      <input
-        type="email"
-        name="email"
-        value={profile.email}
-        readOnly
-        className="w-full border bg-gray-100 px-3 py-2 rounded mb-4"
-      />
-
-      <p className="mb-4 text-gray-600">
-        Last Login: <span className="font-semibold">{profile.lastLogin}</span>
-      </p>
-
-      <button
-        onClick={handleSave}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-      >
-        Save Changes
-      </button>
     </div>
+
+    <div className="mb-4">
+      <p className="text-gray-500 text-sm">Full Name</p>
+      <p className="text-xl font-semibold">{name}</p>
+    </div>
+
+    <div className="mb-4">
+      <p className="text-gray-500 text-sm">Email</p>
+      <p className="text-lg">{userEmail}</p>
+    </div>
+
+    <div className="mb-4">
+      <p className="text-gray-500 text-sm">Role</p>
+      <p className="text-lg capitalize">{role}</p>
+    </div>
+
+    <div>
+      <p className="text-gray-500 text-sm">Account Created</p>
+      <p className="text-lg">{new Date(createdAt).toLocaleString()}</p>
+    </div>
+  </div>
+</div>
+
   );
 };
 

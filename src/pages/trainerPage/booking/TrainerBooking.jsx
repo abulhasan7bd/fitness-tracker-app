@@ -8,10 +8,10 @@ const TrainerBooking = () => {
   // Receive trainer and slot from location.state
   const trainer = location.state?.data;
   const slot = location.state?.slot;
+  const bookingTrainer = location.state.classItem;
 
   // Plan state
   const [selectedPlan, setSelectedPlan] = useState("basic");
-
   const handleJoinNow = () => {
     if (!selectedPlan) {
       alert("Please select a membership plan.");
@@ -21,7 +21,10 @@ const TrainerBooking = () => {
     navigate(
       `/payment?trainer=${encodeURIComponent(
         trainer.fullName
-      )}&slot=${encodeURIComponent(slot)}&plan=${selectedPlan}`
+      )}&slot=${encodeURIComponent(slot)}&plan=${selectedPlan}`,
+      {
+        state: bookingTrainer,
+      }
     );
   };
 

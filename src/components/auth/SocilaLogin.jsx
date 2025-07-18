@@ -22,7 +22,7 @@ const SocilaLogin = () => {
         //  Admin  Trainer  Member (default)
         // role: "Admin",
         // role: "Trainer",
-        role: "Member",
+        role: "member",
       };
 
       // Save user to server

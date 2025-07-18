@@ -55,11 +55,19 @@ const Be_a_Trainer = () => {
     setValue("availableDays", values);
   };
 
+  const fitnessCategories = [
+    "Yoga Basics",
+    "HIIT Training",
+    "Pilates Core",
+    "Zumba Dance",
+    "Strength Training",
+    "Cardio Kickboxing",
+  ];
   const onSubmit = (data) => {
     const finalData = {
       ...data,
       email: user?.email,
-      status: "pending",
+      status: "Pending",
     };
 
     // server save Be a Trainer
@@ -106,7 +114,6 @@ const Be_a_Trainer = () => {
             <p className="text-red-500 text-sm">{errors.fullName.message}</p>
           )}
         </div>
-
         {/* Email */}
         <input
           type="email"
@@ -114,7 +121,6 @@ const Be_a_Trainer = () => {
           readOnly
           className="input input-bordered w-full bg-gray-100 text-gray-600"
         />
-
         {/* Age */}
         <div>
           <input
@@ -127,7 +133,6 @@ const Be_a_Trainer = () => {
             <p className="text-red-500 text-sm">{errors.age.message}</p>
           )}
         </div>
-
         {/* Profile Image */}
         <input
           type="url"
@@ -135,7 +140,6 @@ const Be_a_Trainer = () => {
           {...register("profileImage")}
           className="input input-bordered w-full"
         />
-
         {/* profiel bio  */}
         <div className="md:col-span-2">
           <label htmlFor="bio" className="block font-semibold mb-2">
@@ -158,7 +162,6 @@ const Be_a_Trainer = () => {
             <p className="text-red-500 text-sm mt-1">{errors.bio.message}</p>
           )}
         </div>
-
         {/* university Nmae and passing year  */}
         <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* University Name */}
@@ -211,7 +214,6 @@ const Be_a_Trainer = () => {
             )}
           </div>
         </div>
-
         {/* Skills Checkboxes */}
         <div className="md:col-span-2">
           <label className="font-semibold block mb-2">Skills:</label>
@@ -224,7 +226,27 @@ const Be_a_Trainer = () => {
             ))}
           </div>
         </div>
-
+        {/* Category Selection */}
+        <div className="md:col-span-2">
+          <label htmlFor="category" className="font-semibold block mb-2">
+            Category:
+          </label>
+          <select
+            id="category"
+            {...register("category", { required: "Category is required" })}
+            className="select select-bordered w-full"
+          >
+            <option value="">Select a category</option>
+            {fitnessCategories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+          {errors.category && (
+            <p className="text-red-500 text-sm">{errors.category.message}</p>
+          )}
+        </div>
         {/* Available Days */}
         <div className="md:col-span-2">
           <label className="font-semibold block mb-2">Available Days:</label>
@@ -235,7 +257,6 @@ const Be_a_Trainer = () => {
             closeMenuOnSelect={false}
           />
         </div>
-
         {/* Available Time */}
         <input
           type="text"
@@ -243,14 +264,12 @@ const Be_a_Trainer = () => {
           {...register("availableTime")}
           className="input input-bordered w-full"
         />
-
         {/* Other Info */}
         <textarea
           placeholder="Other Info (Optional)"
           {...register("otherInfo")}
           className="textarea textarea-bordered w-full md:col-span-2"
         ></textarea>
-
         {/* work experience  */}
         <div className="md:col-span-2 space-y-4">
           <h3 className="text-xl font-bold mb-4">Work Experience</h3>
@@ -303,7 +322,6 @@ const Be_a_Trainer = () => {
             />
           </div>
         </div>
-
         {/* Submit */}
         <button type="submit" className="btn btn-primary w-full md:col-span-2">
           Apply

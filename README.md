@@ -1,6 +1,6 @@
-# 🏃‍♂️ Fitness Tracker Application
+# 🏃‍♂️ Fitness Tracker Application - Client Side
 
-A responsive web-based fitness management platform designed to help users track their workouts, manage routines, and connect with trainers. Built using modern web technologies with role-based access for users and admins.
+A responsive fitness management platform where users can track workouts, connect with trainers, and manage routines. Built with React and Firebase.
 
 ---
 
@@ -10,55 +10,49 @@ A responsive web-based fitness management platform designed to help users track 
 
 ---
 
-## 📁 Repositories
+## 📁 Repository
 
-- **Client Side Repo**: [GitHub - Client](https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-abulhasan7bd)
-- **Server Side Repo**: [GitHub - Server](https://github.com/Programming-Hero-Web-Course4/b11a12-server-side-abulhasan7bd)
-
----
-
-## 🛠️ Admin Credentials
-
-- 👤 **Name**: Md. Abul Hasan  
-- 📧 **Email**: abulhasan7bd@gmail.com  
-- 🔐 **Password**: aA1234
-
-> Use these credentials to log in as an admin and explore all available features.
+🔗 **Client Repo**: [GitHub - Client](https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-abulhasan7bd)
 
 ---
 
-## 🌟 Features
+## 👨‍💻 Admin Login
 
-- ✅ **Responsive Design** – Fully responsive for mobile, tablet, and desktop devices.
-- 🔐 **Firebase Authentication** – Secure login/signup using Firebase auth.
-- 🧑‍💼 **Role-Based Dashboard** – Separate access for Admins, Trainers, and Members.
-- 🔁 **React Router DOM** – Smooth client-side navigation with protected routes.
-- 📅 **React Select Integration** – Stylish and user-friendly dropdowns for selecting days, skills, etc.
-- 🔍 **Dynamic Search & Filtering** – Easy filtering of classes or trainers.
-- 📈 **Progress & Tracker Components** – Track fitness goals and class progress.
-- 📝 **Feedback & Reviews** – Users can leave reviews for trainers.
-- 🗄️ **MongoDB Database** – Stores classes, users, trainers, feedbacks securely.
-- 🌐 **Express + Node.js Server** – Robust server-side API for managing app data.
+- **Name**: Md. Abul Hasan  
+- **Email**: abulhasan7bd@gmail.com  
+- **Password**: aA1234
 
 ---
 
-## 📦 Tech Stack
+## ✨ Features
 
-| Frontend               | Backend              |
-|------------------------|----------------------|
-| React.js               | Node.js              |
-| React Router DOM       | Express.js           |
-| React Select           | MongoDB (via Mongoose) |
-| Firebase Auth          | JWT Token Auth       |
-| Tailwind CSS + DaisyUI |                     |
+- ✅ Responsive design for all devices
+- 🔐 Firebase Authentication (Signup/Login)
+- 🧑‍💼 Role-based dashboard (Admin, Trainer, Member)
+- 🧭 Protected routes with React Router DOM
+- 📅 React Select for easy multi-day selection
+- 📊 Progress & tracker UI components
+- 📝 Feedback and review system
+- 🔎 Class/trainer filtering and search
 
 ---
 
-## 🚀 Getting Started (For Developers)
+## 🛠️ Tech Stack
 
-1. Clone both repos (client & server)
-2. Set up `.env` file for server with your MongoDB & JWT config
-3. Run server:
-   ```bash
-   npm install
-   npm run start
+- React.js (with Vite)
+- React Router DOM
+- Firebase Auth + Hosting
+- Tailwind CSS + DaisyUI
+- React Hook Form
+- React Select
+
+---
+
+## 🚀 Getting Started (Developers)
+
+```bash
+git clone https://github.com/Programming-Hero-Web-Course4/b11a12-client-side-abulhasan7bd
+cd b11a12-client-side-abulhasan7bd
+
+npm install
+npm run dev

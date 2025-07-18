@@ -6,15 +6,15 @@ import Swal from "sweetalert2";
 import UseAuth from "../../hooks/UseAuth";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
- import UseAdmin from '../../hooks/UseAdmin'
+import UseAdmin from "../../hooks/UseAdmin";
 const Navbar = () => {
   const { user } = UseAuth();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { userInfo } = UseAdmin();
-    const role_info = userInfo[0]?.role;
-  
-    console.log(role_info);
+  const { userInfo } = UseAdmin();
+  const role_info = userInfo[0];
+  console.log(role_info?.role)
+   
   const handleLogout = () => {
     firebaseSignOut(auth)
       .then(() => {

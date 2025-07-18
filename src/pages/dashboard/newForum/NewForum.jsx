@@ -1,14 +1,16 @@
 import React, { useState } from "react";
- import Swal from "sweetalert2";
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import UseAuth from "../../../hooks/UseAuth";
+import UseAdmin from "../../../hooks/UseAdmin";
 import UseAxios from "../../../hooks/UseAxios";
- 
-const NewForum = () => {
-  const { user } = UseAuth();  
-  const useAxios = UseAxios();
-  const navigate = useNavigate();
 
+const NewForum = () => {
+  const { userInfo } = UseAdmin();
+  const role_info = userInfo?.[0];
+  const useAxios = UseAxios();
+
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
     content: "",
@@ -27,10 +29,7 @@ const NewForum = () => {
     const newForum = {
       title: formData.title,
       content: formData.content,
-      author: {
-        name: user?.displayName || "Anonymous",
-        email: user?.email,
-      },
+      role_info,
       votes: {
         up: [],
         down: [],

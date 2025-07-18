@@ -5,8 +5,9 @@ import { useEffect } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-const CheckoutForm = ({ price, bookingData }) => {
-  console.log(price, bookingData);
+const CheckoutForm = ({ price, bookingData, bookingdata }) => {
+  console.log(bookingData)
+  const bookingCount = bookingdata;
   const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
@@ -67,6 +68,7 @@ const CheckoutForm = ({ price, bookingData }) => {
             transactionId: paymentIntent.id,
             price,
             date: new Date(),
+            bookingCount,
           });
 
           // Navigate after successful save

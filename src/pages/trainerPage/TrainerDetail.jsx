@@ -1,23 +1,25 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import UseAxios from "../../hooks/UseAxios";
 import { useQuery } from "@tanstack/react-query";
 
 const DataDetail = () => {
+  const location = useLocation();
+  const { classItem } = location.state || {};
   const axiosInstance = UseAxios();
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, isLoading, error } = useQuery({
     queryKey: ["data", id],
     queryFn: async () => {
-      const res = await axiosInstance.get(`/beatriner/${id}`);
+      const res = await axiosInstance.get(`/single-trainer/${id}`);
       return res.data;
     },
     enabled: !!id,
   });
 
   const handleSlotClick = (slot) => {
-    navigate(`/booking/${id}`, { state: { data, slot } });
+    navigate(`/booking/${id}`, { state: { data, slot, classItem } });
   };
   if (isLoading) return <h2 className="text-center mt-10">Loading.....</h2>;
   if (error)

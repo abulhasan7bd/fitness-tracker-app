@@ -7,7 +7,6 @@ const UseUserInfo = () => {
   const axiosSecure = UseAxios();
   const { user } = UseAuth();
   const email = user?.email;
-
   const { data: userInfo = {}, isLoading, error } = useQuery({
     queryKey: ["user", email],
     queryFn: async () => {

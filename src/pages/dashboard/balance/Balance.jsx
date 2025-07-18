@@ -2,51 +2,61 @@ import React from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import UseAxios from "../../../hooks/UseAxios";
 import { useQuery } from "@tanstack/react-query";
+import { ResponsiveContainer } from "recharts";
+
+// Simple Tailwind spinner
+const Spinner = () => (
+  <div className="flex justify-center items-center h-40">
+    <div className="w-12 h-12 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+  </div>
+);
+
 const Balance = () => {
   const useAxios = UseAxios();
 
-  // ১. বুকিং পেমেন্ট ডেটা নিয়ে আসা (শেষ ৬ ট্রানজেকশন এবং টোটাল)
-  const { data: payments = [], isLoading: loadingPayments } = useQuery({
-    queryKey: ["bookingPayments"],
-    queryFn: async () => {
-      const res = await useAxios.get("/booking-payments"); // তোমার API এন্ডপয়েন্ট দিন
-      return res.data;
-    },
-  });
-
-  // ২. নিউজলেটার সাবস্ক্রাইবার সংখ্যা
+  // Newsletter Subscribers
   const { data: newsletterSubscribers = [], isLoading: loadingSubscribers } =
     useQuery({
       queryKey: ["newsletterSubscribers"],
       queryFn: async () => {
-        const res = await useAxios.get("/subscriptions"); // API এন্ডপয়েন্ট দিন
+        const res = await useAxios.get("/subscriptions");
         return res.data;
       },
     });
 
-  // ৩. পেইড মেম্বার সংখ্যা
+  // Payment Transactions
   const { data: paidMembers = [], isLoading: loadingPaidMembers } = useQuery({
     queryKey: ["paidMembers"],
     queryFn: async () => {
-      const res = await useAxios.get("/paid-members"); // তোমার API এন্ডপয়েন্ট দিন
+      const res = await useAxios.get("/payment");
       return res.data;
     },
   });
 
-  if (loadingPayments || loadingSubscribers || loadingPaidMembers) {
-    return <p>Loading...</p>;
+  // Show spinner while loading
+  if (loadingSubscribers || loadingPaidMembers) {
+    return <Spinner />;
   }
 
-  // Total balance (সব পেমেন্টের যোগফল)
-  const totalBalance = payments.reduce(
-    (sum, payment) => sum + payment.amount,
+  // Total Balance Calculation
+  const totalBalance = paidMembers.reduce(
+    (sum, item) => sum + (item.price || 0),
     0
   );
 
-  // সর্বশেষ ৬ টি ট্রানজেকশন
-  const lastSixTransactions = payments.slice(-6).reverse();
+  // Last 6 transactions
+  const lastSixTransactions = [...paidMembers]
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 6)
+    .map((txn) => ({
+      _id: txn._id,
+      date: txn.date,
+      memberEmail: txn.payerEmail || txn.email || txn.userEmail,
+      amount: txn.price || 0,
+      status: txn.status || "paid",
+    }));
 
-  // চার্ট ডাটা
+  // Chart Data
   const chartData = [
     { name: "Newsletter Subscribers", value: newsletterSubscribers.length },
     { name: "Paid Members", value: paidMembers.length },
@@ -55,22 +65,26 @@ const Balance = () => {
   const COLORS = ["#0088FE", "#00C49F"];
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow rounded-lg">
-      <h2 className="text-3xl font-bold mb-6 text-center">Balance Overview</h2>
+    <div className="max-w-7xl mx-auto p-4 sm:p-6 md:p-8 bg-white shadow rounded-lg">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center">
+        Balance Overview
+      </h2>
 
       <div className="mb-8 text-center">
-        <p className="text-xl font-semibold">
+        <p className="text-lg sm:text-xl font-semibold">
           Total Remaining Balance:{" "}
           <span className="text-green-600">${totalBalance.toFixed(2)}</span>
         </p>
       </div>
 
-      <div className="mb-8">
-        <h3 className="text-2xl font-semibold mb-4">Last 6 Transactions</h3>
+      <div className="mb-8 overflow-x-auto">
+        <h3 className="text-xl sm:text-2xl font-semibold mb-4">
+          Last 6 Transactions
+        </h3>
         {lastSixTransactions.length === 0 ? (
           <p>No transactions found.</p>
         ) : (
-          <table className="w-full border border-gray-300 text-left text-sm">
+          <table className="min-w-[600px] w-full border border-gray-300 text-left text-sm">
             <thead className="bg-gray-100">
               <tr>
                 <th className="py-2 px-4 border">Date</th>
@@ -96,28 +110,32 @@ const Balance = () => {
       </div>
 
       <div>
-        <h3 className="text-2xl font-semibold mb-4">
+        <h3 className="text-xl sm:text-2xl font-semibold mb-4">
           Subscribers vs Paid Members
         </h3>
-        <PieChart width={400} height={300}>
-          <Pie
-            data={chartData}
-            cx="50%"
-            cy="50%"
-            outerRadius={100}
-            label
-            dataKey="value"
-          >
-            {chartData.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
-          <Tooltip />
-          <Legend />
-        </PieChart>
+        <div className="w-full h-[300px]">
+          <ResponsiveContainer>
+            <PieChart>
+              <Pie
+                data={chartData}
+                cx="50%"
+                cy="50%"
+                outerRadius={100}
+                label
+                dataKey="value"
+              >
+                {chartData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+              <Tooltip />
+              <Legend />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );

@@ -30,6 +30,8 @@ import AllNewsLetter from "../pages/dashboard/newsletterall/AllnewsLetter";
 import TrainerDeletebyRole from "../pages/dashboard/deleteTrainer/TrainerDeletebyRole";
 import Balance from "../pages/dashboard/balance/Balance";
 import NewForum from "../pages/dashboard/newForum/NewForum";
+import ForumDetail from "../pages/latest_post/ForumDetail";
+import AllTrainers from "../pages/dashboard/allTrainers/AllTrainers";
 
 const router = createBrowserRouter([
   {
@@ -64,7 +66,7 @@ const router = createBrowserRouter([
       },
       { path: "/classes", element: <Classes /> },
       { path: "/forum", element: <ForumPosts /> },
-      // { path: "/forum", element: <ForumPage /> },
+      { path: "/forum/:id", element: <ForumDetail /> },
     ],
   },
   {
@@ -80,7 +82,11 @@ const router = createBrowserRouter([
       { path: "my-bookings", element: <MyBooking /> },
       {
         path: "be-a-trainer",
-        element: <Be_a_Trainer />,
+        element: (
+          <PrivateRoute>
+            <Be_a_Trainer />
+          </PrivateRoute>
+        ),
       },
       {
         path: "be-a-trainer/apply",
@@ -101,6 +107,7 @@ const router = createBrowserRouter([
       { path: "appliedTrainer", element: <ApplyedTrainer /> },
       { path: "new-forum", element: <NewForum /> },
       { path: "balance", element: <Balance /> },
+      { path: "allTrainers", element: <AllTrainers /> },
     ],
   },
   {

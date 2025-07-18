@@ -4,6 +4,7 @@ import dummyPosts from "./forum";
 const POSTS_PER_PAGE = 6;
 
 const ForumPage = () => {
+  console.log("forumPost")
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(dummyPosts.length / POSTS_PER_PAGE);

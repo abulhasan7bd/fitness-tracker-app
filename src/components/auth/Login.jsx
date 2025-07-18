@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import UseAuth from "../../hooks/UseAuth";
 import SocilaLogin from "./SocilaLogin";
+import { Helmet } from "react-helmet";
 const Login = () => {
   const { userLogin } = UseAuth();
   const location = useLocation();
@@ -37,62 +38,69 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen px-4">
-      <form onSubmit={handleSubmit} className="w-full max-w-md">
-        <fieldset className="bg-base-200 border border-base-300 rounded-box p-6">
-          <p className=" text-lg font-bold mb-4 text-center">Login</p>
+    <>
+   
+      <Helmet>
+        <title>FitTrack |   Login</title>
+      </Helmet>
 
-          {/* Email Field */}
-          <div className="mb-4">
-            <label className="label" htmlFor="email">
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              name="email"
-              className="input input-bordered w-full"
-              placeholder="Email"
-              required
-            />
-          </div>
+      <div className="flex justify-center items-center min-h-screen px-4">
+        <form onSubmit={handleSubmit} className="w-full max-w-md">
+          <fieldset className="bg-base-200 border border-base-300 rounded-box p-6">
+            <p className="text-lg font-bold mb-4 text-center">Login</p>
 
-          {/* Password Field */}
-          <div className="mb-4">
-            <label className="label" htmlFor="password">
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              name="password"
-              className="input input-bordered w-full"
-              placeholder="Password"
-              required
-            />
-          </div>
+            {/* Email Field */}
+            <div className="mb-4">
+              <label className="label" htmlFor="email">
+                Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                className="input input-bordered w-full"
+                placeholder="Email"
+                required
+              />
+            </div>
 
-          {/* Login Button */}
-          <button type="submit" className="btn btn-neutral w-full mb-4">
-            Login
-          </button>
+            {/* Password Field */}
+            <div className="mb-4">
+              <label className="label" htmlFor="password">
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                className="input input-bordered w-full"
+                placeholder="Password"
+                required
+              />
+            </div>
 
-          {/* Divider */}
-          <div className="divider">OR</div>
+            {/* Login Button */}
+            <button type="submit" className="btn btn-neutral w-full mb-4">
+              Login
+            </button>
 
-          {/* Google Login */}
-          <SocilaLogin />
+            {/* Divider */}
+            <div className="divider">OR</div>
 
-          {/* Register Redirect */}
-          <p className="text-center">
-            Don't have an account?{" "}
-            <Link to="/signup" className="text-blue-600 hover:underline">
-              Register
-            </Link>
-          </p>
-        </fieldset>
-      </form>
-    </div>
+            {/* Google Login */}
+            <SocilaLogin />
+
+            {/* Register Redirect */}
+            <p className="text-center">
+              Don't have an account?{" "}
+              <Link to="/signup" className="text-blue-600 hover:underline">
+                Register
+              </Link>
+            </p>
+          </fieldset>
+        </form>
+      </div>
+    </>
   );
 };
 

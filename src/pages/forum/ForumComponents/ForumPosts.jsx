@@ -7,7 +7,6 @@ import UseAuth from "../../../hooks/UseAuth";
 import { Helmet } from "react-helmet";
 
 const ForumPosts = () => {
-  console.log("render form post");
   const useAxios = UseAxios();
   const { user } = UseAuth();
   const queryClient = useQueryClient();
@@ -22,10 +21,9 @@ const ForumPosts = () => {
       return res.data;
     },
   });
-
+ 
   // provide your vote
   const onVote = async (id, type) => {
-    console.log("click");
     try {
       const res = await useAxios.patch(`/forums/${id}/vote`, {
         email: user.email,
@@ -38,8 +36,6 @@ const ForumPosts = () => {
       console.error("Vote error:", error);
     }
   };
-
-  console.log(forums)
   if (isLoading) {
     return <h2>Loading....</h2>;
   }

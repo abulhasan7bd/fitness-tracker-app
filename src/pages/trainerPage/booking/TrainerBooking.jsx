@@ -10,6 +10,7 @@ const TrainerBooking = () => {
   const slot = location.state?.slot;
   const bookingTrainer = location.state.classItem;
 
+
   // Plan state
   const [selectedPlan, setSelectedPlan] = useState("basic");
   const handleJoinNow = () => {

@@ -1,35 +1,37 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { FaArrowLeft, FaArrowRight, FaStar } from "react-icons/fa";
-
+import UseAxios from "../../hooks/UseAxios";
+import { useQuery } from '@tanstack/react-query';
+ 
+ 
 const Testimonial = () => {
-  const [reviews, setReviews] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
   const [reviewsPerPage, setReviewsPerPage] = useState(3); // Default 3 for large screens
 
+  const axiosSecure = UseAxios();
+ 
+  const { data: reviews = [], isLoading, isError, error } = useQuery({
+    queryKey: ['reviews'],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/reviews");
+      return res.data;
+    },
+  });
+ 
   useEffect(() => {
-    // Fetch review data
-    axios
-      .get("http://localhost:5000/reviews")
-      .then((res) => setReviews(res.data))
-      .catch((err) => console.error("Error fetching reviews:", err));
-  }, []);
-
-  useEffect(() => {
-    // Set reviewsPerPage based on screen size
     const handleResize = () => {
       const width = window.innerWidth;
       if (width < 640) {
-        setReviewsPerPage(1); // Mobile
+        setReviewsPerPage(1);
       } else if (width < 1024) {
-        setReviewsPerPage(2); // Tablet
+        setReviewsPerPage(2);
       } else {
-        setReviewsPerPage(3); // Desktop
+        setReviewsPerPage(3);
       }
     };
 
-    handleResize(); // Initial
-    window.addEventListener("resize", handleResize); // Update on resize
+    handleResize();
+    window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -52,6 +54,22 @@ const Testimonial = () => {
   const handleNext = () => {
     setStartIndex((prev) => (prev + 1) % total);
   };
+
+  if (isLoading) {
+    return (
+      <div className="text-center py-10 text-blue-500 font-semibold">
+        Loading reviews...
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="text-center py-10 text-red-500 font-semibold">
+        Failed to load reviews: {error.message}
+      </div>
+    );
+  }
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-12 bg-gray-100 rounded-xl shadow-lg my-8">

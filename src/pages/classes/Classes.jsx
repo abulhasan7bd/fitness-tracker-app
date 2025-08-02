@@ -48,6 +48,7 @@ const Classes = () => {
   );
 
   const handleLink = (trainer, classItem) => {
+    console.log("classes",classItem)
     if (!trainer?._id) return;
     navigate(`/trainers/${trainer._id}`, {
       state: { classItem },
@@ -61,7 +62,7 @@ const Classes = () => {
   return (
     <>
       <Helmet>
-        <title>FitTrack | All Classes</title>
+        <title>FitTrack | All Claslsses</title>
       </Helmet>
       <div className="max-w-6xl mx-auto px-4 py-10">
         <h1 className="text-3xl font-bold mb-8 text-center text-blue-700">

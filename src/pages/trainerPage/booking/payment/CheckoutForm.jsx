@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ price, bookingData, bookingdata }) => {
-  console.log(bookingData)
   const bookingCount = bookingdata;
   const navigate = useNavigate();
   const stripe = useStripe();
@@ -18,6 +17,7 @@ const CheckoutForm = ({ price, bookingData, bookingdata }) => {
   const [success, setSuccess] = useState("");
   const useAxios = UseAxios();
 
+  console.log(bookingdata);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!stripe || !elements) return;
@@ -65,6 +65,7 @@ const CheckoutForm = ({ price, bookingData, bookingdata }) => {
           // Save payment to server
           await useAxios.post("/payment", {
             ...bookingData,
+            targetId: bookingdata._id,
             transactionId: paymentIntent.id,
             price,
             date: new Date(),

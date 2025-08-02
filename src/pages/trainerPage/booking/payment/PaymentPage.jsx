@@ -13,6 +13,7 @@ const PaymentPage = () => {
   const slot = searchParams.get("slot");
   const plan = searchParams.get("plan");
 
+  console.log(bookingdata)
   const [formData, setFormData] = useState({
     name: user?.displayName || "",
     email: userEmail,

@@ -1,8 +1,8 @@
 import React from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
-import UseAxios from "../../../hooks/UseAxios";
 import { useQuery } from "@tanstack/react-query";
 import { ResponsiveContainer } from "recharts";
+import UseSecure from './../../../hooks/UseSecure';
 
 // Simple Tailwind spinner
 const Spinner = () => (
@@ -12,7 +12,7 @@ const Spinner = () => (
 );
 
 const Balance = () => {
-  const useAxios = UseAxios();
+  const useAxios = UseSecure();
 
   // Newsletter Subscribers
   const { data: newsletterSubscribers = [], isLoading: loadingSubscribers } =

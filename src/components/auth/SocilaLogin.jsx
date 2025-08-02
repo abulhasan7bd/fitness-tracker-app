@@ -8,6 +8,7 @@ const SocilaLogin = () => {
   const { googleRegister, setLoading } = UseAuth();
   const location = useLocation();
   const redirect = location.state?.from.pathname || "/";
+
   const navigate = useNavigate();
   const useAxios = UseAxios();
   const handleGoogleLogin = async () => {

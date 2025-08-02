@@ -8,7 +8,7 @@ import UseAxios from "../../hooks/UseAxios";
 import { Helmet } from "react-helmet";
 
 const Signup = () => {
-  const { googleRegister, accountCreate, setLogin } = UseAuth();
+  const { googleRegister, accountCreate, setLoading } = UseAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const redirect = location.state?.from.pathname || "/";
@@ -76,7 +76,7 @@ const Signup = () => {
     googleRegister()
       .then((res) => {
         console.log(res);
-        setLogin(true);
+        setLoading(true);
         Swal.fire({
           position: "center",
           icon: "success",

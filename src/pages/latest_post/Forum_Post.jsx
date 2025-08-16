@@ -17,7 +17,7 @@ const Forum_Post = () => {
   });
 
   const posts = data?.slice(0, 6) || [];
-  console.log(posts)
+
 
    if (isLoading || isError) {
     return (

@@ -48,7 +48,6 @@ const Classes = () => {
   );
 
   const handleLink = (trainer, classItem) => {
-    console.log("classes",classItem)
     if (!trainer?._id) return;
     navigate(`/trainers/${trainer._id}`, {
       state: { classItem },

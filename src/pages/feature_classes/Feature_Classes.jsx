@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import UseAxios from "./../../hooks/UseAxios";
+import UseSecure from "./../../hooks/UseSecure";
 import ForBidden from "../errorPage/ForBidden";
 import LoadingSpiner from "../loading/LoadingSpiner";
 
 const Feature_Classes = () => {
-  const useAxiso = UseAxios();
+  const useAxiso = UseSecure();
   const token = localStorage.getItem("access-token");
 
   const {

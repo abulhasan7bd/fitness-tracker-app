@@ -20,7 +20,7 @@ A responsive fitness management platform where users can track workouts, connect
 
 - **Name**: Md. Abul Hasan  
 - **Email**: abulhasan7bd@gmail.com  
-- **Password**: aA1234
+- **Password**: abulhasan7bd@gmail.com 
 
 ---
 

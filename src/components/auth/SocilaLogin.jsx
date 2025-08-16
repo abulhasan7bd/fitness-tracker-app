@@ -20,9 +20,7 @@ const SocilaLogin = () => {
         name: user?.displayName,
         email: user?.email,
         photoURL: user?.photoURL,
-        //  Admin  Trainer  Member (default)
-        // role: "Admin",
-        // role: "Trainer",
+        //  admin trainer member (default)
         role: "member",
       };
 

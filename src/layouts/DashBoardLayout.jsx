@@ -54,6 +54,13 @@ const DashBoardLayout = () => {
           >
             <FaCalendarPlus /> All Trainer
           </Link>
+              <Link
+            onClick={() => setSidebarOpen(false)}
+            to="/dashboard/profile"
+            className="flex items-center gap-2 hover:text-blue-600 dark:hover:text-[#7ADAA5] transition-colors"
+          >
+            <FaUserCheck /> Profile
+          </Link>
           <Link
             onClick={() => setSidebarOpen(false)}
             to="/dashboard/appliedTrainer"

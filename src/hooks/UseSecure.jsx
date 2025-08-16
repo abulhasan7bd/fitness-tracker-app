@@ -27,6 +27,7 @@ const UseSecure = () => {
     (response) => response,
     (error) => {
       if (
+       
         error.response &&
         (error.response.status === 401 || error.response.status === 403)
       ) {

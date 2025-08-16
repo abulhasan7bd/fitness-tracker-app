@@ -1,16 +1,54 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@import "daisyui";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
+/* Custom Font */
 @theme {
   --font-Roboto: "Roboto", sans-serif;
 }
 
+/* Custom Dark Variant */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Light Mode Styles */
 @layer theme {
-  .dard {
-    @apply bg-red-300;
+  body {
+    @apply bg-gradient-to-r from-[#239BA7] via-[#7ADAA5] to-[#CADCAE] text-gray-900 font-Roboto;
+  }
+
+  nav {
+    @apply bg-gradient-to-r from-[#239BA7] via-[#7ADAA5] to-[#CADCAE] text-white;
+  }
+
+  button, .btn {
+    @apply bg-[#239BA7] text-white hover:bg-[#7ADAA5] transition-colors;
+  }
+
+  a {
+    @apply text-gray-900 hover:text-[#CADCAE] transition-colors;
   }
 }
+
+/* Dark Mode Styles */
+@layer theme {
+  .dark body {
+    @apply bg-gray-900 text-gray-100;
+  }
+
+  .dark nav {
+    @apply bg-gray-800 text-gray-100;
+  }
+
+  .dark button, .dark .btn {
+    @apply bg-gray-700 text-gray-100 hover:bg-gray-600;
+  }
+
+  .dark a {
+    @apply text-gray-100 hover:text-[#7ADAA5];
+  }
+}
+
+/* Custom Utilities */
 @layer utilities {
   .profile p {
     display: none;
@@ -20,3 +58,31 @@
     display: block;
   }
 }
+
+
+
+
+/* dd  */
+/* @import "tailwindcss";
+@plugin "daisyui";
+
+
+@theme {
+  --font-display: "Satoshi", "sans-serif";
+  --font-poppins: "Poppins", sans-serif;
+}
+
+@layer theme{
+  .dard {
+    @apply bg-red-300
+  }
+}
+@layer utilities {
+  .profile p{
+    display: none;
+  }
+
+  .profile:hover p {
+    display: block;
+  }
+} */

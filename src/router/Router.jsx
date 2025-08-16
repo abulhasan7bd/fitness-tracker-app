@@ -32,6 +32,7 @@ import Balance from "../pages/dashboard/balance/Balance";
 import NewForum from "../pages/dashboard/newForum/NewForum";
 import ForumDetail from "../pages/latest_post/ForumDetail";
 import AllTrainers from "../pages/dashboard/allTrainers/AllTrainers";
+import Overview from "../components/overview/Overview";
 
 const router = createBrowserRouter([
   {
@@ -80,6 +81,7 @@ const router = createBrowserRouter([
       { index: true, element: <DashBoardHome /> },
       { path: "profile", element: <Profile /> },
       { path: "my-bookings", element: <MyBooking /> },
+      { path: "overview", element: <Overview /> },
       {
         path: "be-a-trainer",
         element: (

@@ -15,7 +15,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { userInfo } = UseAdmin();
   const role_info = userInfo[0];
-  console.log(role_info);
+  console.log(role_info?.role);
 
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 

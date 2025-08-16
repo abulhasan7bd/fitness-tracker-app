@@ -33,74 +33,72 @@ const Forum_Post = () => {
   }
 
   return (
-    <section className="max-w-6xl mx-auto px-4 py-12 bg-white rounded-xl shadow-lg">
-      <h2 className="text-3xl font-bold mb-12 text-center text-gray-900">
-        Latest Forum Posts
-      </h2>
+ <section className="max-w-6xl mx-auto px-4 py-12 bg-white dark:bg-gray-900 rounded-xl shadow-lg transition-colors">
+  <h2 className="text-3xl font-bold mb-12 text-center text-[#239BA7] dark:text-[#CADCAE]">
+    Latest Forum Posts
+  </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-        {posts.map((post) => {
-          const {
-            _id,
-            title,
-            content,
-          
-            role_info: { name, email, photoURL, role },
-          } = post;
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+    {posts.map((post) => {
+      const {
+        _id,
+        title,
+        content,
+        role_info: { name, email, photoURL, role },
+      } = post;
 
-          return (
-            <article
-              key={_id}
-              className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out"
-            >
-              {/* Title */}
-              <Link to={`/forum/${_id}`}>
-                <h3 className="text-xl font-semibold mb-3 text-blue-700 hover:text-blue-900 transition-colors duration-200">
-                  {title || "Untitled"}
-                </h3>
-              </Link>
+      return (
+        <article
+          key={_id}
+          className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out border border-[#7ADAA5] dark:border-[#239BA7]"
+        >
+          {/* Title */}
+          <Link to={`/forum/${_id}`}>
+            <h3 className="text-xl font-semibold mb-3 text-[#239BA7] dark:text-[#CADCAE] hover:text-[#7ADAA5] dark:hover:text-[#239BA7] transition-colors duration-200">
+              {title || "Untitled"}
+            </h3>
+          </Link>
 
-              {/* Content preview */}
-              <p className="text-gray-700 mb-6 leading-relaxed line-clamp-3">
-                {content?.slice(0, 100)}...
-              </p>
+          {/* Content preview */}
+          <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed line-clamp-3">
+            {content?.slice(0, 100)}...
+          </p>
 
-              {/* Author Info */}
-              <div className="flex items-center gap-4 mt-4">
-                <img
-                  src={photoURL}
-                  alt={name}
-                  className="w-10 h-10 rounded-full object-cover border"
-                />
-                <div>
-                  <p className="font-semibold text-gray-800">
-                    {name}{" "}
-                    <span className="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded ml-2">
-                      {role}
-                    </span>
-                  </p>
-                  <p className="text-sm text-gray-500">{email}</p>
-                </div>
-              </div>
-
-              {/* Date + Read more */}
-              <div className="mt-4 flex items-center justify-between">
-                <span className="text-sm text-gray-400">
-                  
+          {/* Author Info */}
+          <div className="flex items-center gap-4 mt-4">
+            <img
+              src={photoURL}
+              alt={name}
+              className="w-10 h-10 rounded-full object-cover border border-[#7ADAA5] dark:border-[#239BA7]"
+            />
+            <div>
+              <p className="font-semibold text-gray-800 dark:text-gray-100">
+                {name}{" "}
+                <span className="text-xs bg-[#7ADAA5]/30 dark:bg-[#239BA7]/30 text-[#239BA7] dark:text-[#CADCAE] px-2 py-0.5 rounded ml-2">
+                  {role}
                 </span>
+              </p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">{email}</p>
+            </div>
+          </div>
 
-                <Link
-                  to={`/forum/${_id}`}
-                  className="text-blue-600 font-medium hover:text-blue-800 text-sm"
-                >
-                  Read More &rarr;
-                </Link>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-    </section>
+          {/* Date + Read more */}
+          <div className="mt-4 flex items-center justify-between">
+            <span className="text-sm text-gray-400 dark:text-gray-500"></span>
+
+            <Link
+              to={`/forum/${_id}`}
+              className="text-[#239BA7] dark:text-[#CADCAE] font-medium hover:text-[#7ADAA5] dark:hover:text-[#239BA7] text-sm transition-colors"
+            >
+              Read More &rarr;
+            </Link>
+          </div>
+        </article>
+      );
+    })}
+  </div>
+</section>
+
   );
 };
 

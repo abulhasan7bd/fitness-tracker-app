@@ -52,47 +52,48 @@ const Banner = () => {
   };
 
   return (
- <Slider {...settings}>
-  {slides.map((slide) => (
-    <div key={slide.id}>
-      <div
-        className="relative h-[70vh] md:h-[80vh] w-full bg-cover bg-center"
-        style={{ backgroundImage: `url(${slide.image})` }}
-      >
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 
+    <Slider {...settings}>
+      {slides.map((slide) => (
+        <div key={slide.id}>
+          <div
+            className="relative h-[70vh] md:h-[80vh] w-full bg-cover bg-center"
+            style={{ backgroundImage: `url(${slide.image})` }}
+          >
+            {/* Gradient Overlay */}
+            <div
+              className="absolute inset-0 
                         bg-gradient-to-t from-[#239BA7]/80 via-[#7ADAA5]/60 to-[#CADCAE]/40 
                         dark:from-gray-900/80 dark:via-gray-800/60 dark:to-gray-900/40
-                        transition-colors"></div>
+                        transition-colors"
+            ></div>
 
-        {/* Text Content */}
-        <div className="absolute inset-0 flex items-center justify-center text-center px-4">
-          <div className="max-w-3xl text-white dark:text-gray-100 space-y-6">
-            <h1 className="text-3xl md:text-5xl font-extrabold drop-shadow-md">
-              {slide.title}
-            </h1>
-            <p className="text-lg md:text-xl font-light drop-shadow-sm">
-              {slide.description}
-            </p>
-            <Link to="/classes">
-         <button className="bg-gradient-to-r from-[#239BA7] to-[#7ADAA5] 
+            {/* Text Content */}
+            <div className="absolute inset-0 flex items-center justify-center text-center px-4">
+              <div className="max-w-3xl text-white dark:text-gray-100 space-y-6">
+                <h1 className="text-3xl md:text-5xl font-extrabold drop-shadow-md">
+                  {slide.title}
+                </h1>
+                <p className="text-lg md:text-xl font-light drop-shadow-sm">
+                  {slide.description}
+                </p>
+                <Link to="/classes">
+                  <button
+                    className="bg-gradient-to-r from-[#239BA7] to-[#7ADAA5] 
                    hover:from-[#7ADAA5] hover:to-[#239BA7] 
                    dark:from-gray-800 dark:via-gray-700 dark:to-gray-900 
                    dark:hover:from-gray-700 dark:hover:via-gray-600 dark:hover:to-gray-800
                    text-white dark:text-gray-100 
-                   font-semibold px-6 py-2 rounded-full shadow-lg transition-all duration-300 cursor-pointer">
-  View All Classes
-</button>
-
-            </Link>
+                   font-semibold px-6 py-2 rounded-full shadow-lg transition-all duration-300 cursor-pointer"
+                  >
+                    View All Classes
+                  </button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  ))}
-</Slider>
-
-
+      ))}
+    </Slider>
   );
 };
 

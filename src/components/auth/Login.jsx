@@ -44,62 +44,68 @@ const Login = () => {
         <title>FitTrack |   Login</title>
       </Helmet>
 
-      <div className="flex justify-center items-center min-h-screen px-4">
-        <form onSubmit={handleSubmit} className="w-full max-w-md">
-          <fieldset className="bg-base-200 border border-base-300 rounded-box p-6">
-            <p className="text-lg font-bold mb-4 text-center">Login</p>
+    <div className="flex justify-center items-center min-h-screen px-4 bg-gray-50 dark:bg-gray-900">
+  <form onSubmit={handleSubmit} className="w-full max-w-md">
+    <fieldset className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-8 shadow-lg">
+      <p className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-gray-100">
+        Login
+      </p>
 
-            {/* Email Field */}
-            <div className="mb-4">
-              <label className="label" htmlFor="email">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                className="input input-bordered w-full"
-                placeholder="Email"
-                required
-              />
-            </div>
-
-            {/* Password Field */}
-            <div className="mb-4">
-              <label className="label" htmlFor="password">
-                Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                name="password"
-                className="input input-bordered w-full"
-                placeholder="Password"
-                required
-              />
-            </div>
-
-            {/* Login Button */}
-            <button type="submit" className="btn btn-neutral w-full mb-4">
-              Login
-            </button>
-
-            {/* Divider */}
-            <div className="divider">OR</div>
-
-            {/* Google Login */}
-            <SocilaLogin />
-
-            {/* Register Redirect */}
-            <p className="text-center">
-              Don't have an account?{" "}
-              <Link to="/signup" className="text-blue-600 hover:underline">
-                Register
-              </Link>
-            </p>
-          </fieldset>
-        </form>
+      {/* Email Field */}
+      <div className="mb-4">
+        <label className="block text-gray-700 dark:text-gray-200 mb-1" htmlFor="email">
+          Email
+        </label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          className="input input-bordered w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400 rounded-lg px-4 py-2"
+          placeholder="Email"
+          required
+        />
       </div>
+
+      {/* Password Field */}
+      <div className="mb-4">
+        <label className="block text-gray-700 dark:text-gray-200 mb-1" htmlFor="password">
+          Password
+        </label>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          className="input input-bordered w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400 rounded-lg px-4 py-2"
+          placeholder="Password"
+          required
+        />
+      </div>
+
+      {/* Login Button */}
+      <button
+        type="submit"
+        className="btn btn-primary w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg py-2 mb-4 shadow-md transition-all duration-300"
+      >
+        Login
+      </button>
+
+      {/* Divider */}
+      <div className="divider text-gray-400 dark:text-gray-300">OR</div>
+
+      {/* Google Login */}
+      <SocilaLogin />
+
+      {/* Register Redirect */}
+      <p className="text-center mt-4 text-gray-700 dark:text-gray-300">
+        Don't have an account?{" "}
+        <Link to="/signup" className="text-blue-600 hover:underline dark:text-blue-400">
+          Register
+        </Link>
+      </p>
+    </fieldset>
+  </form>
+</div>
+
     </>
   );
 };

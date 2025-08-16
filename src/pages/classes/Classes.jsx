@@ -72,7 +72,7 @@ const Classes = () => {
           <LoadingSpiner />
         ) : (
           <>
-            <div className="mb-6 max-w-md mx-auto">
+            <div className="mb-6 max-w-md mx-auto text-black">
               <input
                 type="text"
                 placeholder="Search by class category..."

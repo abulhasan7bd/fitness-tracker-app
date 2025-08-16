@@ -48,9 +48,9 @@ const NewsLetter = () => {
   };
 
   return (
-   <section className="w-full my-16 px-4">
-  <div className="bg-blue-50 py-12 px-6 sm:px-10 rounded-xl max-w-3xl mx-auto shadow-md">
-    <h2 className="text-3xl font-bold mb-6 text-center text-blue-800">
+ <section className="w-full my-16 px-4">
+  <div className="bg-[#239BA7]/10 dark:bg-gray-800 py-12 px-6 sm:px-10 rounded-xl max-w-3xl mx-auto shadow-md transition-colors">
+    <h2 className="text-3xl font-bold mb-6 text-center text-[#239BA7] dark:text-[#CADCAE]">
       Subscribe to our Newsletter
     </h2>
 
@@ -58,7 +58,7 @@ const NewsLetter = () => {
       <input
         type="text"
         placeholder="Your Name"
-        className="flex-1 px-4 py-3 rounded-lg border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="flex-1 px-4 py-3 rounded-lg border border-[#7ADAA5]/50 dark:border-[#CADCAE]/50 focus:outline-none focus:ring-2 focus:ring-[#239BA7] dark:focus:ring-[#7ADAA5] bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
         value={name}
         onChange={(e) => setName(e.target.value)}
         required
@@ -67,7 +67,7 @@ const NewsLetter = () => {
       <input
         type="email"
         placeholder="Your Email"
-        className="flex-1 px-4 py-3 rounded-lg border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="flex-1 px-4 py-3 rounded-lg border border-[#7ADAA5]/50 dark:border-[#CADCAE]/50 focus:outline-none focus:ring-2 focus:ring-[#239BA7] dark:focus:ring-[#7ADAA5] bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
@@ -75,24 +75,25 @@ const NewsLetter = () => {
 
       <button
         type="submit"
-        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition"
+        className="bg-gradient-to-r from-[#239BA7] to-[#7ADAA5] dark:from-[#7ADAA5] dark:to-[#CADCAE] text-white font-semibold px-6 py-3 rounded-lg transition duration-300 hover:brightness-110"
       >
         Subscribe Now
       </button>
     </form>
 
     {status === "success" && (
-      <p className="mt-4 text-green-600 text-center font-medium">
+      <p className="mt-4 text-green-500 dark:text-green-400 text-center font-medium">
         Thank you for subscribing!
       </p>
     )}
     {status === "error" && (
-      <p className="mt-4 text-red-600 text-center font-medium">
+      <p className="mt-4 text-red-500 dark:text-red-400 text-center font-medium">
         Please enter a valid name and email.
       </p>
     )}
   </div>
 </section>
+
 
   );
 };

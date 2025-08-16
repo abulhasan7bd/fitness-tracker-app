@@ -4,7 +4,7 @@ import Feature from "./feature/Feature";
 import About from "./about/About";
 import Feature_Classes from "./feature_classes/Feature_Classes";
 import Testimonial from "./testimonial/Testimonial";
- import NewsLetter from "./newsletter/NewsLetter";
+import NewsLetter from "./newsletter/NewsLetter";
 import Team from "./team/Team";
 import { Helmet } from "react-helmet";
 import Forum_Post from "./latest_post/Forum_Post";

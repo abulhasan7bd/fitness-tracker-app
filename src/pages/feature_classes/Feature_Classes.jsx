@@ -23,6 +23,7 @@ const Feature_Classes = () => {
       return res.data.result;
     },
   });
+
   if (isLoading) {
     return <LoadingSpiner />;
   }
@@ -32,9 +33,9 @@ const Feature_Classes = () => {
   }
 
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="py-12 bg-gray-50 dark:bg-gray-900 transition-colors">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
+        <h2 className="text-3xl font-bold text-center mb-8 text-[#239BA7] dark:text-[#CADCAE]">
           🏆 Featured Classes
         </h2>
 
@@ -42,13 +43,13 @@ const Feature_Classes = () => {
           {classData.map((cls) => (
             <div
               key={cls._id}
-              className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition"
+              className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow hover:shadow-lg transition"
             >
-              <h3 className="text-xl font-semibold text-blue-600 mb-2">
+              <h3 className="text-xl font-semibold text-[#239BA7] dark:text-[#7ADAA5] mb-2">
                 {cls.category}
               </h3>
-              <p className="text-gray-600 mb-3">{cls.details}</p>
-              <span className="text-sm text-green-600 font-medium">
+              <p className="text-gray-600 dark:text-gray-300 mb-3">{cls.details}</p>
+              <span className="text-sm text-[#7ADAA5] dark:text-[#CADCAE] font-medium">
                 📈 {cls.bookingCount} Bookings
               </span>
             </div>

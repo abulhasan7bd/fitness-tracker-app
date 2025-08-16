@@ -94,48 +94,58 @@ const Signup = () => {
       <Helmet>
         <title>FitTrack | Signup</title>
       </Helmet>
-      <div className="flex justify-center items-center min-h-screen px-4">
+      <div className="flex justify-center items-center min-h-screen px-4 bg-gray-50 dark:bg-gray-900">
         <form onSubmit={handleSubmit} className="w-full max-w-2xl">
-          <fieldset className="bg-base-200 border border-base-300 rounded-box p-6">
-            <p className=" text-center text-[2rem] font-semibold">Sign In</p>
+          <fieldset className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 shadow-lg">
+            <p className="text-center text-3xl font-semibold mb-6 text-gray-800 dark:text-gray-100">
+              Sign In
+            </p>
 
             {/* Two column layout on md+, single column on mobile */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="label">Name</label>
+                <label className="block text-gray-700 dark:text-gray-200 mb-1">
+                  Name
+                </label>
                 <input
                   type="text"
                   name="name"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400 rounded-lg px-3 py-2"
                   placeholder="Name"
                   required
                 />
               </div>
               <div>
-                <label className="label">Email</label>
+                <label className="block text-gray-700 dark:text-gray-200 mb-1">
+                  Email
+                </label>
                 <input
                   type="email"
                   name="email"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400 rounded-lg px-3 py-2"
                   placeholder="Email"
                   required
                 />
               </div>
               <div>
-                <label className="label">Photo URL</label>
+                <label className="block text-gray-700 dark:text-gray-200 mb-1">
+                  Photo URL
+                </label>
                 <input
                   type="text"
                   name="photoURL"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400 rounded-lg px-3 py-2"
                   placeholder="Photo URL"
                 />
               </div>
               <div>
-                <label className="label">Password</label>
+                <label className="block text-gray-700 dark:text-gray-200 mb-1">
+                  Password
+                </label>
                 <input
                   type="password"
                   name="password"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:ring focus:ring-blue-200 dark:focus:ring-blue-400 rounded-lg px-3 py-2"
                   placeholder="Password"
                   required
                   pattern="(?=.*[a-z])(?=.*[A-Z]).+"
@@ -146,23 +156,31 @@ const Signup = () => {
 
             {/* Buttons */}
             <div className="mt-6">
-              <button type="submit" className="btn btn-neutral w-full mb-4">
+              <button
+                type="submit"
+                className="btn btn-primary w-full mb-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition-all duration-300"
+              >
                 Register
               </button>
 
-              <p className="text-center mb-2">Or</p>
+              <p className="text-center text-gray-500 dark:text-gray-400 mb-2">
+                Or
+              </p>
 
               <button
                 type="button"
                 onClick={handleGoogleLogin}
-                className="btn btn-outline w-full mb-4"
+                className="btn btn-outline w-full mb-4 border-blue-600 text-blue-600 hover:bg-blue-50 dark:border-blue-400 dark:text-blue-400 dark:hover:bg-gray-700 rounded-lg transition-all duration-300"
               >
                 Continue with Google
               </button>
 
-              <p className="text-center">
+              <p className="text-center text-gray-700 dark:text-gray-300">
                 Already have an account?{" "}
-                <Link to="/login" className="text-blue-600 hover:underline">
+                <Link
+                  to="/login"
+                  className="text-blue-600 hover:underline dark:text-blue-400"
+                >
                   Login
                 </Link>
               </p>

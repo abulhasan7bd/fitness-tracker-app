@@ -29,40 +29,52 @@ const trainers = [
 
 const Team = () => {
   return (
-  <section className="max-w-6xl mx-auto px-4 py-12 bg-[#239BA7]/10 dark:bg-gray-800 rounded-lg shadow-md transition-colors">
+<section className="max-w-6xl mx-auto px-4 py-12 bg-[#239BA7]/10 dark:bg-gray-800 rounded-lg shadow-md transition-colors">
   <h2 className="text-3xl font-bold mb-10 text-center text-[#239BA7] dark:text-[#CADCAE]">
     Meet Our Trainers
   </h2>
 
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-    {trainers.map(({ id, name, bio, expertise, photo }) => (
-      <div
-        key={id}
-        className="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 flex flex-col items-center text-center transition-colors"
-      >
-        <img
-          src={photo}
-          alt={name}
-          className="w-32 h-32 rounded-full object-cover mb-4 border-2 border-[#7ADAA5]"
-        />
-        <h3 className="text-xl font-semibold mb-2 text-[#239BA7] dark:text-[#CADCAE]">
-          {name}
-        </h3>
-        <p className="text-gray-600 dark:text-gray-300 mb-3">{bio}</p>
-        <div className="flex flex-wrap justify-center gap-2">
-          {expertise.map((skill, idx) => (
-            <span
-              key={idx}
-              className="bg-[#7ADAA5]/20 text-[#239BA7] dark:bg-[#CADCAE]/30 dark:text-[#239BA7] text-sm font-medium px-3 py-1 rounded-full"
-            >
-              {skill}
-            </span>
-          ))}
+    {trainers.map(({ id, name, bio, expertise, photo }, idx) => {
+      const borderColors = ["#239BA7", "#7ADAA5", "#CADCAE"];
+      const borderColor = borderColors[idx % borderColors.length];
+
+      return (
+        <div
+          key={id}
+          className={`bg-white dark:bg-gray-700 rounded-lg  shadow-lg p-6 flex flex-col items-center text-center transition-colors border-4`}
+          style={{ borderColor: "#7ADAA5"  }}
+        >
+          <img
+            src={photo}
+            alt={name}
+            className="w-32 h-32 rounded-full object-cover mb-4"
+            style={{ borderColor: borderColor, borderWidth: "2px", borderStyle: "solid" }}
+          />
+          <h3 className="text-xl font-semibold mb-2 text-[#239BA7] dark:text-[#CADCAE]">
+            {name}
+          </h3>
+          <p className="text-gray-600 dark:text-gray-300 mb-3">{bio}</p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {expertise.map((skill, idx2) => (
+              <span
+                key={idx2}
+                className={`text-sm font-medium px-3 py-1 rounded-full`}
+                style={{
+                  backgroundColor: `${borderColor}33`,
+                  color: borderColor,
+                }}
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
-    ))}
+      );
+    })}
   </div>
 </section>
+
 
   );
 };

@@ -28,7 +28,7 @@ const Classes = () => {
     },
   });
 
-  const { data: trainers = [] } = useQuery({
+   const { data: trainers = [] } = useQuery({
     queryKey: ["trainers"],
     queryFn: async () => {
       const res = await useAxiso.get("/approved-trainers");

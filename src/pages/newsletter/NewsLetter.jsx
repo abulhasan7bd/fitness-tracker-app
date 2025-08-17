@@ -48,51 +48,58 @@ const NewsLetter = () => {
   };
 
   return (
- <section className="w-full my-16 px-4">
-  <div className="bg-[#239BA7]/10 dark:bg-gray-800 py-12 px-6 sm:px-10 rounded-xl max-w-3xl mx-auto shadow-md transition-colors">
-    <h2 className="text-3xl font-bold mb-6 text-center text-[#239BA7] dark:text-[#CADCAE]">
-      Subscribe to our Newsletter
-    </h2>
+<section className="w-full my-16 px-4">
+  <div className="relative max-w-3xl mx-auto">
+    {/* Gradient border wrapper */}
+    <div className="absolute -inset-[2px] rounded-xl bg-gradient-to-r from-[#239BA7] via-[#7ADAA5] to-[#CADCAE] dark:from-[#7ADAA5] dark:via-[#CADCAE] dark:to-[#239BA7] opacity-80"></div>
 
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
-      <input
-        type="text"
-        placeholder="Your Name"
-        className="flex-1 px-4 py-3 rounded-lg border border-[#7ADAA5]/50 dark:border-[#CADCAE]/50 focus:outline-none focus:ring-2 focus:ring-[#239BA7] dark:focus:ring-[#7ADAA5] bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
+    {/* Inner content box */}
+    <div className="relative bg-[#239BA7]/10 dark:bg-gray-800 py-12 px-6 sm:px-10 rounded-xl shadow-md transition-colors">
+      <h2 className="text-3xl font-bold mb-6 text-center text-[#239BA7] dark:text-[#CADCAE]">
+        Subscribe to our Newsletter
+      </h2>
 
-      <input
-        type="email"
-        placeholder="Your Email"
-        className="flex-1 px-4 py-3 rounded-lg border border-[#7ADAA5]/50 dark:border-[#CADCAE]/50 focus:outline-none focus:ring-2 focus:ring-[#239BA7] dark:focus:ring-[#7ADAA5] bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
+      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
+        <input
+          type="text"
+          placeholder="Your Name"
+          className="flex-1 px-4 py-3 rounded-lg border border-[#7ADAA5]/50 dark:border-[#CADCAE]/50 focus:outline-none focus:ring-2 focus:ring-[#239BA7] dark:focus:ring-[#7ADAA5] bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
 
-      <button
-        type="submit"
-        className="bg-gradient-to-r from-[#239BA7] to-[#7ADAA5] dark:from-[#7ADAA5] dark:to-[#CADCAE] text-white font-semibold px-6 py-3 rounded-lg transition duration-300 hover:brightness-110"
-      >
-        Subscribe Now
-      </button>
-    </form>
+        <input
+          type="email"
+          placeholder="Your Email"
+          className="flex-1 px-4 py-3 rounded-lg border border-[#7ADAA5]/50 dark:border-[#CADCAE]/50 focus:outline-none focus:ring-2 focus:ring-[#239BA7] dark:focus:ring-[#7ADAA5] bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
-    {status === "success" && (
-      <p className="mt-4 text-green-500 dark:text-green-400 text-center font-medium">
-        Thank you for subscribing!
-      </p>
-    )}
-    {status === "error" && (
-      <p className="mt-4 text-red-500 dark:text-red-400 text-center font-medium">
-        Please enter a valid name and email.
-      </p>
-    )}
+        <button
+          type="submit"
+          className="bg-gradient-to-r from-[#239BA7] to-[#7ADAA5] dark:from-[#7ADAA5] dark:to-[#CADCAE] text-white font-semibold px-6 py-3 rounded-lg transition duration-300 hover:brightness-110"
+        >
+          Subscribe Now
+        </button>
+      </form>
+
+      {status === "success" && (
+        <p className="mt-4 text-green-500 dark:text-green-400 text-center font-medium">
+          Thank you for subscribing!
+        </p>
+      )}
+      {status === "error" && (
+        <p className="mt-4 text-red-500 dark:text-red-400 text-center font-medium">
+          Please enter a valid name and email.
+        </p>
+      )}
+    </div>
   </div>
 </section>
+
 
 
   );

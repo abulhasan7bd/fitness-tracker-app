@@ -86,12 +86,12 @@ const Forum_Post = () => {
           <div className="mt-4 flex items-center justify-between">
             <span className="text-sm text-gray-400 dark:text-gray-500"></span>
 
-            <Link
-              to={`/forum/${_id}`}
-              className="text-[#239BA7] dark:text-[#CADCAE] font-medium hover:text-[#7ADAA5] dark:hover:text-[#239BA7] text-sm transition-colors"
-            >
-              Read More &rarr;
-            </Link>
+         <Link
+  to={`/forum/${_id}`}
+  className="inline-block px-4 py-2 text-sm font-medium text-white bg-[#239BA7] rounded hover:bg-[#7ADAA5] dark:bg-[#CADCAE] dark:hover:bg-[#239BA7] transition-colors duration-200"
+>
+  Read More &rarr;
+</Link>
           </div>
         </article>
       );
